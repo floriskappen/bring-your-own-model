@@ -1,0 +1,42 @@
+# BYOM app registry.
+#
+# Adding an app is a data edit to this file; the website renders from it. The
+# schema (registry.schema.json) is the machine-checked contract — run
+# `python3 validate_registry.py` (or let CI run it) before submitting a PR.
+# See website/registry/README.md for the field reference and submission process.
+#
+# The registry is designed to be worth maintaining at N=1. External adopters
+# are a bonus, never a design assumption.
+
+schema_version: v1.0.0
+
+apps:
+  - name: Bedrijfskompas
+    url: https://bedrijfskompas.example
+    description: Company map overview with agentic, personalized matching against your CV.
+    pinned_constitution_version: v1.0.0
+    integration_doc_url: https://bedrijfskompas.example/BYOM-INTEGRATION.md
+    source_url: https://github.com/example/bedrijfskompas
+    badge_variant: light
+    model_powered_features:
+      - name: CV-matched company suggestions
+        description: Ranks companies on the map by fit to your CV; asks the model to extract and match signal.
+        category: worker
+      - name: Deep-dive company brief
+        description: Generates a longer, reasoned brief on a single company when you want more than the card.
+        category: frontier
+
+  - name: AI-laser
+    url: https://ai-laser.example
+    description: E-reader with optional model-powered reading aids.
+    pinned_constitution_version: v1.0.0
+    integration_doc_url: https://ai-laser.example/BYOM-INTEGRATION.md
+    source_url: https://github.com/example/ai-laser
+    badge_variant: light
+    model_powered_features:
+      - name: Inline gloss
+        description: Explains a selected term or passage inline, in the voice of the book.
+        category: worker
+      - name: Chapter recap
+        description: Summarizes the chapter you just finished, for a quick refresher before picking up again.
+        category: worker

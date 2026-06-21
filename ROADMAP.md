@@ -85,14 +85,14 @@ description.
 Treat the registry entry schema as an external interface other apps depend on. Designed to be worth
 it at N=1.
 
-- [ ] Define the registry **entry schema**: required vs optional fields (e.g. name, URL, short
+- [x] Define the registry **entry schema**: required vs optional fields (e.g. name, URL, short
       description, which features are model-powered, model categories used, link to the app's
       `BYOM-INTEGRATION.md`, pinned constitution version, repo/source link).
-- [ ] Choose a data format that drives the site (e.g. a `registry.json` / `registry.yaml` the website
+- [x] Choose a data format that drives the site (e.g. a `registry.json` / `registry.yaml` the website
       renders), so adding an app is a data edit, not a template edit.
-- [ ] Seed the two entries: **de bedrijfskompas** and **de e-lezer**.
-- [ ] Define the submission process (PR-based: add an entry, CI validates it against the schema).
-- [ ] Optional: a schema validator in CI so malformed entries can't merge.
+- [x] Seed the two entries: **Bedrijfskompas** and **AI-laser**.
+- [x] Define the submission process (PR-based: add an entry, CI validates it against the schema).
+- [x] Optional: a schema validator in CI so malformed entries can't merge.
 
 ## Phase 4 — Website build
 
