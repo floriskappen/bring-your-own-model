@@ -71,14 +71,14 @@ The drafts are strong; this is a tightening pass, not a rewrite.
 The badge is an external interface other apps embed. It needs to be a real, downloadable thing, not a
 description.
 
-- [ ] Design the glyph: a **socket / plug / connect** mark. Explicitly not a robot, not a key-as-chore.
-- [ ] Produce SVG badge assets: light and dark variants, plus a small and a standard size.
-- [ ] Define the badge link/markup contract: where it links (the constitution site / a stable URL),
+- [x] Design the glyph: a **socket / plug / connect** mark. Explicitly not a robot, not a key-as-chore.
+- [x] Produce SVG badge assets: light and dark variants, plus a small and a standard size.
+- [x] Define the badge link/markup contract: where it links (the constitution site / a stable URL),
       required `alt` text, and the canonical embed snippets (Markdown + HTML).
-- [ ] Write the honest claim text that travels with the badge ("follows the pattern and invariants — not
+- [x] Write the honest claim text that travels with the badge ("follows the pattern and invariants — not
       proof of safety"), matching `04-badge-and-registry.md`.
-- [ ] Host the badge assets at a stable path so embeds don't break across releases.
-- [ ] Add a favicon / OG image derived from the same glyph for the website.
+- [x] Host the badge assets at a stable path so embeds don't break across releases.
+- [x] Add a favicon / OG image derived from the same glyph for the website.
 
 ## Phase 3 — Registry
 
@@ -90,7 +90,7 @@ it at N=1.
       `BYOM-INTEGRATION.md`, pinned constitution version, repo/source link).
 - [ ] Choose a data format that drives the site (e.g. a `registry.json` / `registry.yaml` the website
       renders), so adding an app is a data edit, not a template edit.
-- [ ] Seed the two entries: **Bedrijfskompas** and **AI-laser**.
+- [ ] Seed the two entries: **de bedrijfskompas** and **de e-lezer**.
 - [ ] Define the submission process (PR-based: add an entry, CI validates it against the schema).
 - [ ] Optional: a schema validator in CI so malformed entries can't merge.
 

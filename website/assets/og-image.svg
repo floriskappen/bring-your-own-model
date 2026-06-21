@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Bring Your Own Model — free software for the LLM era">
+  <title>Bring Your Own Model</title>
+  <rect width="1200" height="630" fill="#fafafa"/>
+  <g transform="translate(120,120) scale(3.75)" fill="#161616">
+    <rect x="4" y="9" width="12" height="14" rx="3"/>
+    <rect x="13" y="13" width="7" height="6" rx="1.5"/>
+    <rect x="18" y="9" width="10" height="14" rx="3"/>
+  </g>
+  <text x="120" y="350" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="72" font-weight="700" fill="#161616" text-rendering="geometricPrecision">Bring Your Own Model</text>
+  <text x="120" y="410" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="30" fill="#555555" text-rendering="geometricPrecision">Free software for the LLM era. The app is free;</text>
+  <text x="120" y="450" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="30" fill="#555555" text-rendering="geometricPrecision">you bring the model for the parts that need it.</text>
+  <text x="120" y="555" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="26" font-weight="700" fill="#888888" text-rendering="geometricPrecision" letter-spacing="2">BYOM</text>
+</svg>
