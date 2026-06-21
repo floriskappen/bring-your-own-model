@@ -22,7 +22,7 @@ The key never touches the developer's infrastructure. It lives in the user's bro
 
 ## The honest threat model
 
-Browser-local keys are a **privacy and UX win, not an absolute security guarantee.** A key in browser storage is readable by any cross-site-scripting flaw on the page — and apps that pull in dependencies are exactly where supply-chain XSS appears. This is a *different* threat profile from server-side-encrypted storage, not a strict upgrade.
+Browser-local keys are a **privacy and control win, not an absolute security guarantee.** A key in browser storage is readable by any cross-site-scripting flaw on the page — and apps that pull in dependencies are exactly where supply-chain XSS appears. This is a *different* threat profile from server-side-encrypted storage, not a strict upgrade.
 
 That is precisely why invariants 3, 4, and 1 (strict CSP, minimal third-party JS, in-memory default) are load-bearing. They belong here, in the shared constitution, rather than being left to each app to rediscover.
 

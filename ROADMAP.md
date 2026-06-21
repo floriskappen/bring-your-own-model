@@ -59,11 +59,11 @@ Tasks:
 
 The drafts are strong; this is a tightening pass, not a rewrite.
 
-- [ ] Consistency pass across all six docs: one voice (plain, unhyped), consistent terminology
+- [x] Consistency pass across all six docs: one voice (plain, unhyped), consistent terminology
       (frontier/worker, "model category", "invariant N", "BYOM-INTEGRATION.md").
-- [ ] Verify the six security invariants are stated identically wherever they appear (constitution,
+- [x] Verify the six security invariants are stated identically wherever they appear (constitution,
       website safety copy, badge claims).
-- [ ] Confirm the honest threat-model language is consistent in `02`, `04`, and the website's safety
+- [x] Confirm the honest threat-model language is consistent in `02`, `04`, and the website's safety
       section — no doc overclaims relative to another.
 
 ## Phase 2 — Badge artifact

@@ -20,7 +20,7 @@ This is the contract for the connect/onboarding flow — the experience of a use
 
 5. **Surface the budget control.** Let the user set an allowance. Show spend against it. Make it obvious that the app enforces this and will stop at the limit. This is where invariant 6 from `02-security-invariants.md` becomes visible to the user.
 
-6. **Tell the truth about safety.** Link to or restate the honest threat model: browser-local is a privacy/UX win, not a cryptographic guarantee. Do not imply more safety than exists.
+6. **Tell the truth about safety.** Link to or restate the honest threat model: browser-local is a privacy/control win, not a cryptographic guarantee. Do not imply more safety than exists.
 
 ## Tone
 
