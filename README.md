@@ -33,16 +33,16 @@ consuming repo).
 
 ## The constitution
 
-The normative content lives in [`CONSTITUTION.md`](./CONSTITUTION.md) today and is being split into
-the per-topic `constitution/` artifact below as part of the v1 build (see
-[`ROADMAP.md`](./ROADMAP.md)):
+The normative content lives in [`constitution/`](./constitution/), one file per topic:
 
-1. Philosophy
-2. Provider model — v1: OpenRouter; request a *category* (frontier / worker), not a specific model
-3. Security invariants — **mandatory**
-4. Wizard UX contract
-5. Badge and registry
-6. Integration guide — how a consuming repo authors its own `BYOM-INTEGRATION.md`
+1. [Philosophy](./constitution/00-philosophy.md)
+2. [Provider model](./constitution/01-provider-model.md) — v1: OpenRouter; request a *category* (frontier / worker), not a specific model
+3. [Security invariants](./constitution/02-security-invariants.md) — **mandatory**
+4. [Wizard UX contract](./constitution/03-wizard-ux-contract.md)
+5. [Badge and registry](./constitution/04-badge-and-registry.md)
+6. [Integration guide](./constitution/05-integration-guide.md) — how a consuming repo authors its own `BYOM-INTEGRATION.md`
+
+A thin index also lives at [`CONSTITUTION.md`](./CONSTITUTION.md).
 
 ## Status
 

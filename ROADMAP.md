@@ -4,9 +4,8 @@ What it takes to ship the **full** v1 of BYOM — not an MVP. v1 is "done" when 
 clean, released, submodule-able artifact; the website is live and honest; the badge and registry are
 real, usable interfaces; and at least one consuming app has proven the integration pattern end to end.
 
-This roadmap is the bridge between the drafted content (currently staged in `temp_files/`) and a
-released repo. Items are grouped into phases that roughly need to happen in order, but several can run
-in parallel once the structure exists.
+This roadmap is the bridge between the drafted content and a released repo. Items are grouped into
+phases that roughly need to happen in order, but several can run in parallel once the structure exists.
 
 ## Definition of done for v1
 
@@ -46,16 +45,15 @@ Turn the staged drafts into the real repo layout. The brief's target tree:
 
 Tasks:
 
-- [ ] Create `constitution/` and move the six drafted docs (`00`–`05`) from `temp_files/` into it.
-- [ ] Move `AGENTS.md`, `CHANGELOG.md`, `VERSION` from `temp_files/` to the repo root.
-- [ ] Decide the fate of the root `CONSTITUTION.md`. Recommended: once `constitution/` exists, replace
-      `CONSTITUTION.md` with a thin index that links into the folder (or delete it and point the README
-      at the folder). Avoid two canonical copies that can drift.
-- [ ] Re-point `README.md` constitution links from `CONSTITUTION.md` to the `constitution/` files.
-- [ ] Move `temp_files/COPY.md` to `website/` as the site's source copy (e.g. `website/COPY.md`).
-- [ ] Delete `temp_files/` once everything is relocated.
-- [ ] Cross-reference pass: every `01-…`/`02-…` reference inside the docs resolves; no dangling links.
-- [ ] Confirm the agent-vs-website separation is obvious from the root (README + AGENTS both say it).
+- [x] Create `constitution/` and move the six drafted docs (`00`–`05`) from `temp_files/` into it.
+- [x] Move `AGENTS.md`, `CHANGELOG.md`, `VERSION` from `temp_files/` to the repo root.
+- [x] Decide the fate of the root `CONSTITUTION.md`. Kept as a **thin index** — links only, no
+      normative content, so there is one canonical copy in `constitution/` and nothing to drift.
+- [x] Re-point `README.md` constitution links from `CONSTITUTION.md` to the `constitution/` files.
+- [x] Move `temp_files/COPY.md` to `website/` as the site's source copy (e.g. `website/COPY.md`).
+- [x] Delete `temp_files/` once everything is relocated.
+- [x] Cross-reference pass: every `01-…`/`02-…` reference inside the docs resolves; no dangling links.
+- [x] Confirm the agent-vs-website separation is obvious from the root (README + AGENTS both say it).
 
 ## Phase 1 — Constitution content finalization
 
@@ -141,7 +139,8 @@ The integration pattern is the whole reusability bet. v1 isn't done until it's b
 ## Cross-cutting / open decisions
 
 - **Website voice:** decided — movement-neutral third person (`COPY.md`). No action.
-- **Root `CONSTITUTION.md` vs `constitution/`:** resolve in Phase 0 (recommend thin index or removal).
+- **Root `CONSTITUTION.md` vs `constitution/`:** resolved in Phase 0 — `CONSTITUTION.md` kept as a
+  thin index linking into `constitution/`, no normative content.
 - **Hosting:** pick a free static host (GitHub Pages / Cloudflare Pages / Netlify) and wire a build/deploy
   step; ensure the deploy preserves the strict CSP.
 - **Domain:** decide whether v1 gets a custom domain or ships on the host's subdomain.
