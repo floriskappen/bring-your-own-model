@@ -1,0 +1,9 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# the design system is a pinned submodule, not part of the website's own source
+vendor/

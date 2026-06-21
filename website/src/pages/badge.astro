@@ -1,0 +1,143 @@
+---
+import Base from '../layouts/Base.astro';
+
+const variants = [
+  { label: 'standard — light', file: '/assets/badge/byom-badge-light.svg', w: 168, h: 44 },
+  { label: 'standard — dark', file: '/assets/badge/byom-badge-dark.svg', w: 168, h: 44 },
+  { label: 'small — light', file: '/assets/badge/byom-badge-light-small.svg', w: 96, h: 26 },
+  { label: 'small — dark', file: '/assets/badge/byom-badge-dark-small.svg', w: 96, h: 26 },
+];
+
+const altText = 'BYOM badge — Bring Your Own Model: follows the pattern and security invariants, not proof of safety.';
+
+const mdSnippets = [
+  { label: 'markdown — light', code: '[![BYOM badge](https://BYOM-SITE/assets/badge/byom-badge-light.svg)](https://BYOM-SITE/)' },
+  { label: 'markdown — dark', code: '[![BYOM badge](https://BYOM-SITE/assets/badge/byom-badge-dark.svg)](https://BYOM-SITE/)' },
+  { label: 'markdown — small light', code: '[![BYOM badge](https://BYOM-SITE/assets/badge/byom-badge-light-small.svg)](https://BYOM-SITE/)' },
+  { label: 'markdown — dark small', code: '[![BYOM badge](https://BYOM-SITE/assets/badge/byom-badge-dark-small.svg)](https://BYOM-SITE/)' },
+];
+
+const htmlSnippets = [
+  { label: 'html — light', code: `<a href="https://BYOM-SITE/" rel="noopener">
+  <img src="https://BYOM-SITE/assets/badge/byom-badge-light.svg"
+       alt="${altText}"
+       width="168" height="44" loading="lazy" decoding="async">
+</a>` },
+  { label: 'html — dark', code: `<a href="https://BYOM-SITE/" rel="noopener">
+  <img src="https://BYOM-SITE/assets/badge/byom-badge-dark.svg"
+       alt="${altText}"
+       width="168" height="44" loading="lazy" decoding="async">
+</a>` },
+  { label: 'html — small light', code: `<a href="https://BYOM-SITE/" rel="noopener">
+  <img src="https://BYOM-SITE/assets/badge/byom-badge-light-small.svg"
+       alt="${altText}"
+       width="96" height="26" loading="lazy" decoding="async">
+</a>` },
+  { label: 'html — small dark', code: `<a href="https://BYOM-SITE/" rel="noopener">
+  <img src="https://BYOM-SITE/assets/badge/byom-badge-dark-small.svg"
+       alt="${altText}"
+       width="96" height="26" loading="lazy" decoding="async">
+</a>` },
+];
+---
+
+<Base title="badge" path="/badge" description="the byom badge — a real, embeddable artifact with copy-paste snippets and an honest claim boundary.">
+  <header class="masthead">
+    <h1 class="big">the badge</h1>
+    <p class="sub">a real, embeddable artifact. it says an app follows the pattern and the invariants — not proof of safety.</p>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <span class="fig">01</span>
+      <h2>the glyph</h2>
+    </div>
+    <div class="prose">
+      <p>a plug-into-socket interlock: a socket body, a narrow neck, and a plug body, joined into one silhouette. it reads as "bring and connect your own" — deliberately not a robot (reads as "agent," the wrong meaning) and not a key-as-chore (too literal and joyless). monochrome, legible at 16px.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="fig">02</span>
+      <h2>variants</h2>
+      <span class="sec-note">light / dark × standard / small</span>
+    </div>
+    <div class="badge-grid">
+      {variants.map((v) => (
+        <div class="badge-cell">
+          <span class="badge-label">{v.label}</span>
+          <img src={v.file} alt={altText} width={v.w} height={v.h} loading="lazy" decoding="async">
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="fig">03</span>
+      <h2>embed snippets — markdown</h2>
+    </div>
+    <div class="prose">
+      <p>markdown alt text cannot contain parentheses inside <code>[...]</code> without breaking the link syntax. use the short alt "byom badge" in markdown embeds; restate the full honest claim (below) in the surrounding page text so the "not proof of safety" boundary travels with the badge wherever it appears.</p>
+    </div>
+    <div style="margin-top: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
+      {mdSnippets.map((s) => (
+        <div>
+          <p style="font: var(--typography-label); text-transform: lowercase; margin: 0 0 var(--space-xs);">{s.label}</p>
+          <pre class="embed-snippet">{s.code}</pre>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="fig">04</span>
+      <h2>embed snippets — html</h2>
+    </div>
+    <div style="margin-top: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
+      {htmlSnippets.map((s) => (
+        <div>
+          <p style="font: var(--typography-label); text-transform: lowercase; margin: 0 0 var(--space-xs);">{s.label}</p>
+          <pre class="embed-snippet">{s.code}</pre>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="fig">05</span>
+      <h2>the honest claim</h2>
+    </div>
+    <div class="prose">
+      <p>restate this near the badge wherever it is shown (footer, about page, badge page), matching the constitution's claim boundary:</p>
+      <p style="font: var(--typography-body-lg); color: var(--color-text-default); margin-top: var(--space-md); padding: var(--space-lg); background: var(--color-surface-claim); border: 1px solid var(--color-border-default);">this app follows the byom pattern and security invariants. the badge is not proof of safety — in-page ui can always be cloned by a malicious site. browser-local keys are a privacy and control win, not a cryptographic guarantee against a determined attacker.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="fig">06</span>
+      <h2>stability</h2>
+    </div>
+    <div class="prose">
+      <p>the badge url path (<code>/assets/badge/&lt;filename&gt;</code>) is a long-lived external contract. other apps embed these urls. the filenames and the path must not change across releases. to evolve the badge, add new files rather than repurposing existing paths. the link target (site root <code>/</code>) is likewise stable.</p>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg class="seed" viewBox="0 0 42 42">
+      <circle cx="21" cy="21" r="2.5" />
+      <circle cx="14" cy="16" r="2" />
+      <circle cx="28" cy="16" r="2" />
+      <circle cx="16" cy="28" r="2" />
+      <circle cx="26" cy="28" r="2" />
+      <circle cx="21" cy="12" r="1.5" />
+      <circle cx="21" cy="30" r="1.5" />
+      <circle cx="12" cy="22" r="1.5" />
+      <circle cx="30" cy="22" r="1.5" />
+    </svg>
+  </div>
+</Base>

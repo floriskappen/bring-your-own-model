@@ -1,0 +1,4 @@
+[submodule "website/vendor/ontwerp"]
+	path = website/vendor/ontwerp
+	url = https://github.com/floriskappen/ontwerpsysteem
+	branch = release

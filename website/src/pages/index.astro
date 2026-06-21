@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import Fireflies from '../components/Fireflies.astro';
+
+const copy = [
+  { fig: '01', title: 'what it is', body: 'byom is a pattern for building apps that have llm or agent functionality at their core without charging anyone a subscription.\n\nthe app works on its own — browse, read, navigate, use the whole scaffold for free. certain features are powered by a model. when a user wants those, they connect their own key. the inference runs on the user\'s own model access, billed directly by their provider. the developer never touches the key or the money.\n\nthe result: the app stays genuinely free, and nobody pays for anyone else\'s inference.' },
+  { fig: '02', title: 'why it exists', body: 'when an app\'s smart features run on inference the developer pays for, the app cannot really be free. the cost has to come back somehow — a subscription, metering, a payment stack — and the developer ends up reselling intelligence they never wanted to resell.\n\nbyom removes that dilemma. the user already has, or can get, model access. they bring it. there is no middleman, no markup, and no billing business growing out of a side project.' },
+  { fig: '03', title: 'the bigger idea', body: 'building software with coding agents is fast and democratized now. that makes it easy to build small, useful tools that solve real problems — and much of that software is meaningfully better with llm inference.\n\nthese tools do not need to become subscription products to exist. they can be free software, available to anyone with the same problem, with each user carrying their own inference cost through their own model access. one person solves their problem, shares it, and everyone with that problem benefits — at no cost to the builder.' },
+  { fig: '04', title: 'how it works, briefly', list: [
+    'the app is free to use and free to host — static front-end code, no developer-run backend.',
+    'model-powered features ask the user to connect a key (v1: openrouter).',
+    'the key stays in the user\'s browser and calls the provider directly. it never reaches the developer\'s servers.',
+    'apps request a model category — frontier or worker — and let the user choose.',
+    'a user-set budget limit keeps inference from running away.',
+  ]},
+  { fig: '05', title: 'on safety, honestly', body: 'keeping the key in the browser is a privacy and control win, not a cryptographic guarantee. a key in browser storage can be exposed by a cross-site-scripting flaw, so byom apps follow a set of security invariants — strict csp, minimal third-party javascript, in-memory by default — to reduce that surface.\n\na byom badge means an app follows the pattern and those invariants. it is not proof of safety: in-page ui can be cloned by a malicious site. stronger phishing resistance would need privileged browser chrome, which is a future direction, not part of this phase. the honest position is plain improvement in privacy and control — not a guarantee against a determined attacker.\n\nread the full security page for the architecture and threat model.', link: '/security', linkText: 'security page' },
+];
+---
+
+<Base title="" path="/">
+  <header class="masthead">
+    <Fireflies text="bring your own model" />
+    <p class="sub">free software for the llm era. the app is free. the user brings their own model for the parts that need it, and pays only for the inference they personally use.</p>
+  </header>
+
+  {copy.map((sec) => (
+    <section>
+      <div class="sec-head">
+        <span class="fig">{sec.fig}</span>
+        <h2>{sec.title}</h2>
+      </div>
+      {sec.body && (
+        <div class="prose" set:html={sec.body.split('\n\n').map(p => `<p>${p}</p>`).join('')} />
+      )}
+      {sec.list && (
+        <div class="prose">
+          <ul>
+            {sec.list.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      )}
+      {sec.link && (
+        <p style="margin-top: var(--space-md);">
+          <a href={sec.link} class="lnk">{sec.linkText} →</a>
+        </p>
+      )}
+    </section>
+  ))}
+
+  <section>
+    <div class="sec-head">
+      <span class="fig">06</span>
+      <h2>the registry</h2>
+      <span class="sec-note">a list of apps that follow the pattern</span>
+    </div>
+    <div class="prose">
+      <p>a list of apps that follow the pattern. worth keeping even with one entry; anyone else adopting it is a bonus.</p>
+      <p style="margin-top: var(--space-md);">
+        <a href="/registry" class="lnk">see the registry →</a>
+      </p>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg class="seed" viewBox="0 0 42 42">
+      <circle cx="21" cy="21" r="2.5" />
+      <circle cx="14" cy="16" r="2" />
+      <circle cx="28" cy="16" r="2" />
+      <circle cx="16" cy="28" r="2" />
+      <circle cx="26" cy="28" r="2" />
+      <circle cx="21" cy="12" r="1.5" />
+      <circle cx="21" cy="30" r="1.5" />
+      <circle cx="12" cy="22" r="1.5" />
+      <circle cx="30" cy="22" r="1.5" />
+    </svg>
+  </div>
+</Base>

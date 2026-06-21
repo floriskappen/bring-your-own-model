@@ -99,17 +99,17 @@ it at N=1.
 Lightweight static site, built from `website/COPY.md`. Copy is **movement-neutral, third person**
 (already decided in `COPY.md`). The site must eat its own dogfood: strict CSP, minimal third-party JS.
 
-- [ ] Pick the static stack (recommend the simplest thing that ships: plain HTML/CSS or a minimal
+- [x] Pick the static stack (recommend the simplest thing that ships: plain HTML/CSS or a minimal
       static generator — no heavy framework, in keeping with "minimal third-party JS").
-- [ ] Build the pages/sections from `COPY.md`: hero, what it is, why it exists, the bigger idea,
+- [x] Build the pages/sections from `COPY.md`: hero, what it is, why it exists, the bigger idea,
       how it works, **safety (honest)**, the registry, footer.
-- [ ] Registry page renders from the Phase 3 data file.
-- [ ] Dedicated **security page** explaining the architecture and the honest threat model in full
+- [x] Registry page renders from the Phase 3 data file.
+- [x] Dedicated **security page** explaining the architecture and the honest threat model in full
       (more than the hero blurb).
-- [ ] Badge page: shows the badge variants and the copy-paste embed snippets.
-- [ ] Apply a strict CSP to the site itself and keep dependencies near zero — the site should model
+- [x] Badge page: shows the badge variants and the copy-paste embed snippets.
+- [x] Apply a strict CSP to the site itself and keep dependencies near zero — the site should model
       the invariants it preaches.
-- [ ] Accessibility + responsive pass; favicon/OG from Phase 2.
+- [x] Accessibility + responsive pass; favicon/OG from Phase 2.
 
 ## Phase 5 — Integration guide validation (the proof)
 
