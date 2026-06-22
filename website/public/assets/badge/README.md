@@ -9,25 +9,35 @@ embed snippets, and the honest claim text that travels with the badge. The websi
 
 ## The glyph
 
-A **plug-into-socket** interlock: a socket body, a narrow neck, and a plug body, joined into one
-silhouette. It reads as "bring and connect your own" — deliberately not a robot (reads as "agent,"
-the wrong meaning) and not a key-as-chore (too literal and joyless), per the constitution's icon
-direction. Monochrome, legible at 16px.
+A **plug connecting into an outlet**: a corded plug on the left, two prongs, and a two-slot socket on
+the right, with a small gap that reads as the moment of connection. It says "bring and connect your
+own" — deliberately not a robot (reads as "agent," the wrong meaning) and not a key-as-chore (too
+literal and joyless), per the constitution's icon direction. Monochrome, legible at 16px, and drawn
+in the slate palette of the site's design system.
 
 ## File inventory
 
-All assets live under `website/assets/`. Badge assets live under the **stable path**
-`website/assets/badge/` — this path is a long-lived external contract and must not churn across
-releases (see "Stability" below).
+The source assets live in the repo under `website/public/assets/`; Astro copies `public/` to the
+site root, so they are **served** at `/assets/…`. Badge assets live under the **stable served path**
+`/assets/badge/` — this path is a long-lived external contract and must not churn across releases
+(see "Stability" below).
 
-| File | Purpose | Size |
-| --- | --- | --- |
-| `badge/byom-badge-light.svg` | Standard badge, light | 168 × 44 |
-| `badge/byom-badge-dark.svg` | Standard badge, dark | 168 × 44 |
-| `badge/byom-badge-light-small.svg` | Small badge, light | 96 × 26 |
-| `badge/byom-badge-dark-small.svg` | Small badge, dark | 96 × 26 |
-| `favicon.svg` | Favicon / monogram | 32 × 32 |
-| `og-image.svg` | Open Graph image (source) | 1200 × 630 |
+| File (repo path under `website/public/assets/`) | Purpose | Size | Origin |
+| --- | --- | --- | --- |
+| `badge/byom-badge-light.svg` | Standard badge, light | 168 × 44 | source |
+| `badge/byom-badge-dark.svg` | Standard badge, dark | 168 × 44 | source |
+| `badge/byom-badge-light-small.svg` | Small badge, light | 96 × 26 | source |
+| `badge/byom-badge-dark-small.svg` | Small badge, dark | 96 × 26 | source |
+| `favicon.svg` | Favicon / monogram | 32 × 32 | source |
+| `og-image.svg` | Open Graph image (source) | 1200 × 630 | source |
+| `og-image.png` | Open Graph image (delivered) | 1200 × 630 | **generated** |
+| `favicon-32.png` | PNG favicon fallback | 32 × 32 | **generated** |
+| `apple-touch-icon.png` | iOS home-screen icon | 180 × 180 | **generated** |
+
+The **generated** PNGs are produced from their SVG sources by `website/scripts/raster-assets.mjs`,
+which runs automatically as the `prebuild` step of `npm run build` (or on demand via `npm run
+raster`). They are committed so the repo is self-contained, and regenerated on every build so they
+never drift from the sources.
 
 Each badge SVG is self-contained (no external references, no scripts, no external fonts) so it is
 safe under a strict CSP and embeds anywhere.
@@ -137,16 +147,17 @@ Restate this near the badge wherever it is shown (footer, about page, badge page
 
 ## Stability
 
-`website/assets/badge/<filename>` is a **long-lived external contract**. Other apps embed these URLs.
-The filenames and the `assets/badge/` path must not change across releases. To evolve the badge,
-add new files (e.g. a new size or a `v2` suffix) rather than repurposing existing paths. The link
-target (site root `/`) is likewise stable.
+The served path `/assets/badge/<filename>` is a **long-lived external contract**. Other apps embed
+these URLs. The filenames and the `/assets/badge/` path must not change across releases. To evolve
+the badge, add new files (e.g. a new size or a `v2` suffix) rather than repurposing existing paths.
+The link target (site root `/`) is likewise stable.
 
 ## Favicon and OG image
 
-- `favicon.svg` is the monogram (the mark on a rounded square). Reference it from the site's
-  `<link rel="icon">`. For broad browser support a rasterized `favicon.ico`/`favicon-32.png` may be
-  added in Phase 4; the SVG is the source.
-- `og-image.svg` is the Open Graph image **source** (1200 × 630). Several social platforms do not
-  render SVG OG images — the Phase 4 build step should rasterize it to `og-image.png` and reference
-  the PNG in `<meta property="og:image">`. The SVG remains the editable source for the glyph.
+- `favicon.svg` is the monogram (the mark on a rounded square). It is referenced from the site's
+  `<link rel="icon">`, with `favicon-32.png` as a PNG fallback and `apple-touch-icon.png` (180 × 180)
+  for iOS — both rasterized from the SVG by the build (see "File inventory").
+- `og-image.svg` is the editable Open Graph **source** (1200 × 630). Because several social platforms
+  and chat unfurlers do not render SVG OG images, the build rasterizes it to `og-image.png`, and
+  `<meta property="og:image">` references the PNG. The raster step inlines the design-system font so
+  the wordmark renders correctly without a system-font fallback.

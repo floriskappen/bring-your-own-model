@@ -45,10 +45,17 @@
 
 ### Extended
 
-- `.registry-list` — app cards rendered from registry.yaml; follows `component.card` recipe (paper card with claim background).
-- `.badge-grid` — badge variant display; follows `material.surface.paper-grain` recipe for the panel.
-- `.embed-snippet` — code blocks for copy-paste embeds; monospace (JetBrains Mono), paper-deep background, hairline border.
+- `.band` — editorial section: one lowercase heading in a sticky left gutter against the reading measure. No eyebrows. (Correction over the initial build, which stamped an uppercase `--typography-mark` eyebrow on every section *and* a heading — uppercase marks are reserved for sparse utility marks per `type.md`, not section headers.)
+- `.app-list` — the registry: a plain hairline-ruled list of apps that use the convention (name · description · source/integration links). Not cards — a registry entry is a fact, not a product.
+- `.inv` — the six security invariants as a numbered hairline list; mono numeral as the only mark.
+- `.embed-snippet` — code blocks for copy-paste embeds; monospace (JetBrains Mono), ink background, hairline border.
+
+## Site shape
+
+One page. The constitution-facing detail (security architecture, full badge asset set, registry submission) lives in the repo / `constitution/`; the site states the pattern plainly on a single scroll (`index.astro`) with in-page anchors. No sub-pages.
 
 ## Propagation log
 
 - 2026-06-21 initial adoption: v0.1.0 — wired tokens.css, fonts, base/type/components/atmosphere/material styles into Astro layout. Slate theme override applied; fireflies effect ported to masthead title.
+- 2026-06-22 voice + shape correction: removed the uppercase tracked eyebrow/label tic across the site to honour the lowercase voice (`type.md`); collapsed the four pages into a single homepage; replaced the registry product-cards with a plain list. Copy plainer, fewer flourishes.
+- 2026-06-22 atmosphere scoping: dropped the nav (single page). Firefly motes moved from the full-page atmosphere into the masthead, revealed through a radial mask centred on the title so they cluster around the header and fade out. The breathing grid is masked out behind the centred content column and fades in over a 140px band toward the page edges; grain + bloom remain full-bleed. Footer spans the full content width.

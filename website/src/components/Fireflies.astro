@@ -1,7 +1,11 @@
 ---
-// Fireflies effect — build-time port of the zoo's fireflyParticles() + weatherText().
-// No client-side JS: particles are deterministically generated at build time
-// using the same LCG the zoo uses, so the effect is CSP-safe (script-src 'none').
+// Fireflies masthead — the title plus the wandering firefly motes that belong
+// *to it*. Each glyph is wrapped in a .wxc span carrying its index so the
+// per-glyph glow ripples across the word (stepped, low-FPS). The motes live in
+// a .firefly-field scoped to this wrapper and are revealed through a radial
+// mask centred on the title, so they cluster around the header text and fade
+// out toward the edges rather than wandering the whole page.
+// No client JS — CSP-safe under script-src 'none'.
 
 const lcg = (n: number): number => ((n * 9301 + 49297) % 233280) / 233280;
 const r2 = (n: number): number => Number(n.toFixed(2));
@@ -9,51 +13,50 @@ const r2 = (n: number): number => Number(n.toFixed(2));
 const WX_FPS = 8;
 const stepTF = (durSec: number): string => `steps(${Math.max(2, Math.round(durSec * WX_FPS))})`;
 
-interface Firefly {
-  x: number; y: number; dx: number; dy: number;
-  dw: number; bd: number; o: number; sz: number;
-  dl: number; bl: number; tf: string; tf2: string;
-}
-
-function fireflyParticles(count = 14): Firefly[] {
-  return Array.from({ length: count }, (_, i) => {
-    const x = r2(6 + lcg(i * 2 + 1) * 88);
-    const y = r2(8 + lcg(i * 3 + 5) * 84);
-    const dx = r2(-18 + lcg(i * 13 + 7) * 36);
-    const dy = r2(-16 + lcg(i * 5 + 19) * 32);
-    const dw = r2(8 + lcg(i * 7 + 3) * 5);
-    const bd = r2(1.6 + lcg(i * 11 + 4) * 1.6);
-    const o = r2(0.7 + lcg(i * 3 + 23) * 0.3);
-    const sz = r2(3 + lcg(i * 17 + 9) * 2);
-    const dl = r2(-lcg(i * 19 + 11) * dw);
-    const bl = r2(-lcg(i * 23 + 13) * bd);
-    return { x, y, dx, dy, dw, bd, o, sz, dl, bl, tf: stepTF(dw), tf2: stepTF(bd) };
-  });
-}
-
-function weatherText(str: string): string {
-  let i = 0;
-  return [...str].map((ch) => {
-    if (ch === ' ') { i += 1; return ' '; }
-    const span = `<span class="wxc" style="--ci:${i}">${ch}</span>`;
-    i += 1;
-    return span;
-  }).join('');
-}
-
 interface Props {
   text: string;
   particles?: number;
 }
+const { text, particles = 16 } = Astro.props;
 
-const { text, particles = 14 } = Astro.props;
-const fireflies = fireflyParticles(particles);
+// Deterministic mote positions/clocks (same LCG idiom as the zoo weather port).
+const fireflies = Array.from({ length: particles }, (_, i) => {
+  const x = r2(2 + lcg(i * 2 + 1) * 96);
+  const y = r2(4 + lcg(i * 3 + 5) * 92);
+  const dx = r2(-18 + lcg(i * 13 + 7) * 36);
+  const dy = r2(-16 + lcg(i * 5 + 19) * 32);
+  const dw = r2(8 + lcg(i * 7 + 3) * 5);
+  const bd = r2(1.6 + lcg(i * 11 + 4) * 1.6);
+  const o = r2(0.7 + lcg(i * 3 + 23) * 0.3);
+  const sz = r2(3 + lcg(i * 17 + 9) * 2);
+  const dl = r2(-lcg(i * 19 + 11) * dw);
+  const bl = r2(-lcg(i * 23 + 13) * bd);
+  return { x, y, dx, dy, dw, bd, o, sz, dl, bl, tf: stepTF(dw), tf2: stepTF(bd) };
+});
+
+// Wrap each glyph in a .wxc span (carrying its ripple index) and group glyphs
+// into per-word .word spans so a word never breaks across lines.
+function weatherText(str: string): string {
+  let i = 0;
+  return str.split(' ').map((word) => {
+    const glyphs = [...word].map((ch) => {
+      const span = `<span class="wxc" style="--ci:${i}">${ch}</span>`;
+      i += 1;
+      return span;
+    }).join('');
+    i += 1; // account for the space, keeping the ripple cadence continuous
+    return `<span class="word">${glyphs}</span>`;
+  }).join(' ');
+}
+
 const html = weatherText(text);
 ---
 
-<div class="firefly-field" aria-hidden="true">
-  {fireflies.map((f) => (
-    <i class="firefly" style={`--x:${f.x}%;--y:${f.y}%;--dx:${f.dx}px;--dy:${f.dy}px;--dw:${f.dw}s;--bd:${f.bd}s;--o:${f.o};--sz:${f.sz}px;--dl:${f.dl}s;--bl:${f.bl}s;--tf:${f.tf};--tf2:${f.tf2}`}></i>
-  ))}
+<div class="masthead">
+  <div class="firefly-field" aria-hidden="true">
+    {fireflies.map((f) => (
+      <i class="firefly" style={`--x:${f.x}%;--y:${f.y}%;--dx:${f.dx}px;--dy:${f.dy}px;--dw:${f.dw}s;--bd:${f.bd}s;--o:${f.o};--sz:${f.sz}px;--dl:${f.dl}s;--bl:${f.bl}s;--tf:${f.tf};--tf2:${f.tf2}`}></i>
+    ))}
+  </div>
+  <h1 class="hero-title wx-fireflies" set:html={html} />
 </div>
-<h1 class="big wx-fireflies" set:html={html} />

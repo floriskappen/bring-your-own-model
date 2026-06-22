@@ -2,20 +2,20 @@
    Built on the ontwerp design system (vendor/ontwerp/), pinned at v0.1.0.
    See .design/DESIGN.md for the adoption record.
 
-   This file imports the design system's built CSS tokens, then applies the
-   system's principles (paper surface, ink text, grain, atmosphere, components)
-   to the BYOM site's structure. All values come from the token layer — no
-   hardcoded colours, spacing, or type. */
+   The site adopts ontwerp's print idiom — paper, ink, grain, hairlines,
+   square corners, lowercase voice, stepped motion — re-skinned to the slate
+   theme. Layout is editorial: a left label-gutter against a measured column,
+   punctuated by full-width structural devices (the deal ledger, the key-path
+   schematic, the registry). All values come from the token layer. */
 
-/* ── design system tokens (non-color: space, type, motion, etc.) ────── */
+/* ── design system tokens (space, type, motion, primitives) ─────────── */
 @import '../../vendor/ontwerp/values/css/tokens.css';
 
-/* ── slate theme — full colour role override ──────────────────────────
-   The zoo's slate skin defines 7 core roles; the derived roles (text-quiet,
-   text-faint, border-*, surface-ink, surface-warm, claim-hover, on-ink) are
-   derived here from the slate palette so the whole token layer is consistent.
-   Bloom/pollen mapped per the zoo's skin override pattern
-   (bloom-a ← surface-claim, bloom-b/c ← accent-soft, pollen ← accent-soft). */
+/* ── slate theme — full role override ─────────────────────────────────
+   The imported tokens carry the cream baseline. We override every role the
+   site touches — primitives, semantics, AND the component tokens (card,
+   link, button, badge, alert, field, selection) — so nothing renders in the
+   leftover cream/red palette. */
 :root {
   /* primitives — surface */
   --color-paper: #E8EBF0;
@@ -26,10 +26,10 @@
   --color-ink-soft: #424A57;
   --color-ink-quiet: #6B7488;
   --color-ink-faint: #9AA3B5;
-  /* primitives — accent (slate blue) */
+  /* primitives — accent (slate blue — the "current" that carries the key) */
   --color-red: #4D6483;
   --color-red-soft: #6E83A0;
-  /* primitives — bloom (mapped to accent-soft / surface-claim per zoo skin) */
+  /* primitives — bloom */
   --color-amber: #6E83A0;
   --color-cream-bloom: rgba(199, 208, 222, 0.5);
   /* primitives — alpha */
@@ -59,23 +59,47 @@
   --color-accent-base: #4D6483;
   --color-accent-soft: #6E83A0;
   /* semantic — border */
-  --color-border-default: rgba(27, 32, 40, 0.65);
-  --color-border-quiet: rgba(27, 32, 40, 0.25);
-  --color-border-strong: rgba(27, 32, 40, 0.95);
+  --color-border-default: rgba(27, 32, 40, 0.55);
+  --color-border-quiet: rgba(27, 32, 40, 0.18);
+  --color-border-strong: rgba(27, 32, 40, 0.9);
   --color-border-accent: rgba(77, 100, 131, 0.85);
 
-  /* bloom + pollen (atmosphere + fireflies) — mapped per zoo slate skin */
+  /* component tokens — re-pointed at slate (these ship cream/red otherwise) */
+  --card-surface: rgba(217, 222, 232, 0.55);
+  --card-border: rgba(27, 32, 40, 0.55);
+  --alert-surface: var(--color-surface-deep);
+  --alert-border: rgba(27, 32, 40, 0.55);
+  --link-text-default: #1B2028;
+  --link-text-hover: #4D6483;
+  --link-underline-default: rgba(27, 32, 40, 0.25);
+  --link-underline-hover: #4D6483;
+  --button-text-default: #1B2028;
+  --button-text-hover: #E8EBF0;
+  --button-surface-hover: #1B2028;
+  --button-border-default: rgba(27, 32, 40, 0.9);
+  --button-border-hover: #1B2028;
+  --field-border-default: rgba(27, 32, 40, 0.55);
+  --field-border-focus: #4D6483;
+  --badge-border: rgba(27, 32, 40, 0.55);
+  --badge-text: #1B2028;
+
+  /* bloom + pollen (atmosphere + fireflies) — slate accent-soft */
   --wx-bloom-a: var(--color-surface-claim);
   --wx-bloom-b: var(--color-accent-soft);
   --wx-bloom-c: var(--color-accent-soft);
   --wx-pollen: var(--color-accent-soft);
+
+  /* layout */
+  --sheet-max: 1120px;
+  --gutter: 12.5rem;       /* width of the editorial label column */
+  --measure: 64ch;         /* comfortable reading width for prose */
 }
 
 /* ── fonts (self-hosted woff2 from the design system bundle) ────────── */
 @font-face {
   font-family: 'Archivo';
   font-style: normal;
-  font-weight: 500 700;
+  font-weight: 500 800;
   font-display: swap;
   src: url('/fonts/archivo-latin.woff2') format('woff2');
 }
@@ -96,6 +120,7 @@
 
 /* ── base ───────────────────────────────────────────────────────────── */
 * { box-sizing: border-box; border-radius: 0; }
+html { scroll-behavior: smooth; }
 html, body { margin: 0; }
 body {
   background: var(--color-surface-page);
@@ -120,15 +145,47 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
   mix-blend-mode: multiply;
-  opacity: 0.62;
+  opacity: 0.5;
 }
 
-/* ── warm bloom (atmosphere — slow drifting radial gradients) ───────── */
+/* ── atmosphere (full-bleed ambient layer — Atmosphere.astro) ────────── */
+.atmosphere { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+/* breathing grid (atmosphere.grid.breathing) */
+@property --bo { syntax: '<number>'; initial-value: 0.08; inherits: false; }
+.grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  opacity: 0.7;
+  /* Hide the grid behind the centred content column (±half the sheet width)
+     and fade it in gradually over a 140px band out toward the page edges, so
+     it never appears abruptly. Grain + bloom are unaffected. */
+  --grid-mask: linear-gradient(to right,
+    #000 0,
+    #000 calc(50% - var(--sheet-max) / 2 - 140px),
+    transparent calc(50% - var(--sheet-max) / 2),
+    transparent calc(50% + var(--sheet-max) / 2),
+    #000 calc(50% + var(--sheet-max) / 2 + 140px),
+    #000 100%);
+  -webkit-mask-image: var(--grid-mask);
+  mask-image: var(--grid-mask);
+}
+.grid i {
+  --bo: var(--a);
+  border-right: 1px solid rgb(27 32 40 / var(--bo));
+  border-bottom: 1px solid rgb(27 32 40 / var(--bo));
+  animation: bo var(--d) ease-in-out infinite;
+  animation-delay: var(--dl);
+}
+@keyframes bo { 0%, 100% { --bo: var(--a); } 50% { --bo: var(--b); } }
+
+/* warm bloom (slow drifting radial gradients) */
 .bloom {
-  position: fixed;
+  position: absolute;
   inset: -20vmax;
-  z-index: 0;
-  pointer-events: none;
   mix-blend-mode: multiply;
   filter: blur(64px);
 }
@@ -142,386 +199,36 @@ body::before {
 }
 .bloom .b1 {
   background: radial-gradient(circle, var(--color-cream-bloom) 0%, transparent 68%);
-  top: -14vmax;
-  left: -8vmax;
+  top: -14vmax; left: -8vmax;
   animation: d1 38s ease-in-out infinite alternate;
 }
 .bloom .b2 {
   background: radial-gradient(circle, var(--color-amber) 0%, transparent 64%);
-  top: 24vmax;
-  right: -18vmax;
-  opacity: 0.42;
+  top: 24vmax; right: -18vmax; opacity: 0.42;
   animation: d2 51s ease-in-out infinite alternate;
 }
 .bloom .b3 {
   background: radial-gradient(circle, var(--color-red-soft) 0%, transparent 60%);
-  bottom: -26vmax;
-  left: 20vmax;
-  opacity: 0.34;
+  bottom: -26vmax; left: 20vmax; opacity: 0.34;
   animation: d3 67s ease-in-out infinite alternate;
 }
 @keyframes d1 { to { transform: translate(8vmax, 6vmax) scale(1.15); } }
 @keyframes d2 { to { transform: translate(-10vmax, -5vmax) scale(0.95); } }
 @keyframes d3 { to { transform: translate(12vmax, -8vmax) scale(1.1); } }
 
-/* ── layout ─────────────────────────────────────────────────────────── */
-.sheet {
-  position: relative;
-  z-index: 1;
-  padding: var(--space-2xl);
-  max-width: 1180px;
-  margin: 0 auto;
-}
-
-/* ── masthead ───────────────────────────────────────────────────────── */
-.masthead { overflow: hidden; position: relative; }
-.masthead .big {
-  position: relative;
-  z-index: 1;
-  font: var(--typography-display);
-  line-height: 0.92;
-  letter-spacing: -0.04em;
-  white-space: nowrap;
-  margin: 0;
-  font-size: clamp(72px, 11vw, 168px);
-}
-.masthead .sub {
-  position: relative;
-  z-index: 1;
-  font: var(--typography-body-lg);
-  color: var(--color-text-soft);
-  max-width: 48ch;
-  margin: var(--space-md) 0 0;
-}
-
-/* ── sections ───────────────────────────────────────────────────────── */
-section { margin-top: var(--space-2xl); }
-.sec-head {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-lg);
-  margin-bottom: var(--space-lg);
-  border-bottom: 1px solid var(--color-border-default);
-  padding-bottom: var(--space-sm);
-}
-.sec-head h2 {
-  font: var(--typography-heading-lg);
-  text-transform: lowercase;
-  margin: 0;
-  font-size: clamp(28px, 3vw, 40px);
-}
-.sec-head .sec-note {
-  margin-left: auto;
-  align-self: center;
-  font: var(--typography-body-sm);
-  text-transform: lowercase;
-  color: var(--color-text-soft);
-}
-.fig {
-  font-family: 'Caveat', cursive;
-  font-weight: 700;
-  font-size: 52px;
-  line-height: 0.7;
-  color: var(--color-accent-base);
-  text-transform: none;
-}
-
-/* ── phyllotaxis divider (material — sunflower seed head) ───────────── */
-.divider {
-  display: flex;
-  justify-content: center;
-  margin: var(--space-2xl) 0;
-}
-.seed {
-  width: 42px;
-  height: 42px;
-  fill: var(--color-text-soft);
-  opacity: 0.8;
-}
-
-/* ── prose ──────────────────────────────────────────────────────────── */
-.prose p {
-  margin: 0;
-  max-width: 68ch;
-}
-.prose p + p { margin-top: var(--space-md); }
-.prose ul {
-  margin: var(--space-md) 0 0;
-  padding: 0;
-  list-style: none;
-}
-.prose li {
-  padding: var(--space-sm) 0;
-  border-bottom: 1px solid var(--color-border-quiet);
-  max-width: 68ch;
-}
-.prose li:last-child { border-bottom: 0; }
-.prose li:first-child { padding-top: 0; }
-
-/* ── links ──────────────────────────────────────────────────────────── */
-a { color: inherit; }
-.lnk {
-  color: var(--link-text-default);
-  text-decoration: underline;
-  text-decoration-color: var(--link-underline-default);
-  text-underline-offset: 3px;
-}
-.lnk:hover {
-  color: var(--link-text-hover);
-  text-decoration-color: var(--link-underline-hover);
-}
-a:focus-visible, button:focus-visible {
-  outline: 2px solid var(--color-accent-base);
-  outline-offset: 2px;
-}
-::selection {
-  background: var(--color-accent-base);
-  color: var(--color-surface-page);
-}
-
-/* ── buttons (component.button.ink-press) ───────────────────────────── */
-.btn {
-  font: var(--button-typography);
-  text-transform: lowercase;
-  color: var(--button-text-default);
-  background: var(--color-surface-page);
-  border: 1px solid var(--button-border-default);
-  border-bottom-width: 3px;
-  padding: var(--button-padding-block) var(--button-padding-inline);
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-inline-gap);
-}
-.btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: radial-gradient(rgb(31 27 22) 1px, transparent 1.4px);
-  background-size: 5px 5px;
-  background-position: center;
-  opacity: 0.06;
-}
-.btn:hover {
-  background: var(--button-surface-hover);
-  color: var(--button-text-hover);
-  border-color: var(--button-border-hover);
-}
-.btn:active {
-  transform: translateY(2px);
-  border-bottom-width: 1px;
-}
-.btn-ink {
-  background: var(--color-surface-ink);
-  color: var(--color-text-on-ink);
-  border-color: var(--color-surface-ink);
-}
-.btn-ink:hover {
-  background: var(--color-surface-page);
-  color: var(--color-text-default);
-  border-color: var(--color-border-strong);
-}
-
-/* ── pills (component pill marks) ───────────────────────────────────── */
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-inline-gap);
-  font: var(--badge-typography);
-  text-transform: uppercase;
-  color: var(--badge-text);
-  border: 1px solid var(--badge-border);
-  padding: var(--badge-padding-block) var(--badge-padding-inline);
-}
-.pill .pdot {
-  width: 6px;
-  height: 6px;
-  background: currentColor;
-  position: relative;
-  z-index: 1;
-}
-.pill-red { color: var(--color-accent-base); border-color: var(--color-accent-base); }
-.pill-quiet { color: var(--color-text-quiet); border-color: var(--color-border-quiet); }
-
-/* ── cards (component paper cards) ──────────────────────────────────── */
-.card {
-  background: var(--card-surface);
-  border: 1px solid var(--card-border);
-  padding: var(--card-padding);
-}
-.card-title {
-  font: var(--typography-heading-md);
-  text-transform: lowercase;
-  margin: 0 0 var(--space-sm);
-}
-.card-body {
-  margin: 0;
-  max-width: 42ch;
-  font: var(--typography-body-sm);
-  color: var(--color-text-soft);
-}
-.card-meta {
-  margin-top: var(--space-md);
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-}
-
-/* ── registry list ──────────────────────────────────────────────────── */
-.registry-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: var(--space-lg);
-}
-.registry-list .card { display: flex; flex-direction: column; gap: var(--space-sm); }
-.registry-list .card-url {
-  font: var(--typography-body-sm);
-  color: var(--color-text-quiet);
-  word-break: break-all;
-}
-.registry-list .card-features {
-  margin-top: var(--space-sm);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-}
-.registry-list .feature-row {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-sm);
-  font: var(--typography-body-sm);
-}
-.registry-list .feature-name { color: var(--color-text-default); }
-.registry-list .feature-desc { color: var(--color-text-soft); flex: 1; }
-
-/* ── badge grid ─────────────────────────────────────────────────────── */
-.badge-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--space-lg);
-}
-.badge-cell {
-  background: var(--color-surface-page);
-  border: 1px solid var(--color-border-default);
-  padding: var(--space-lg);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-  align-items: flex-start;
-  position: relative;
-  isolation: isolate;
-}
-.badge-cell::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-  mix-blend-mode: multiply;
-  opacity: 0.5;
-}
-.badge-cell > * { position: relative; z-index: 1; }
-.badge-cell img { display: block; }
-.badge-cell .badge-label {
-  font: var(--typography-label);
-  text-transform: lowercase;
-  color: var(--color-text-default);
-}
-
-/* ── embed snippets (code blocks) ───────────────────────────────────── */
-.embed-snippet {
-  font: var(--typography-body-sm);
-  font-family: var(--font-mono);
-  background: var(--color-surface-deep);
-  border: 1px solid var(--color-border-default);
-  padding: var(--space-md);
-  overflow-x: auto;
-  white-space: pre;
-  color: var(--color-text-default);
-  text-transform: none;
-  letter-spacing: 0;
-  line-height: 1.5;
-  position: relative;
-  z-index: 1;
-}
-
-/* ── colophon (footer) ──────────────────────────────────────────────── */
-.colophon {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  margin-top: var(--space-2xl);
-  padding-top: var(--space-lg);
-  border-top: 1px solid var(--color-border-default);
-  font: var(--typography-body-sm);
-  color: var(--color-text-soft);
-}
-.leaf-mark {
-  width: 16px;
-  height: 23px;
-  flex: none;
-  color: var(--color-border-strong);
-}
-
-/* ── nav ────────────────────────────────────────────────────────────── */
-.nav {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  padding-bottom: var(--space-lg);
-  margin-bottom: var(--space-lg);
-  border-bottom: 1px solid var(--color-border-default);
-}
-.nav-brand {
-  font: var(--typography-label);
-  text-transform: lowercase;
-  color: var(--color-text-default);
-  text-decoration: none;
-}
-.nav-links {
-  display: flex;
-  gap: var(--space-md);
-  margin-left: auto;
-}
-.nav-links a {
-  font: var(--typography-body-sm);
-  text-transform: lowercase;
-  color: var(--color-text-soft);
-  text-decoration: none;
-}
-.nav-links a:hover { color: var(--color-accent-base); }
-
-/* ── fireflies text effect (motion.weather from zoo) ──────────────────
-   Each glyph is wrapped in a .wxc span carrying its index (--ci); the index
-   offsets the delay so the glow ripples across the word. Stepped (steps()) —
-   the system's low-FPS, stop-motion look. The word glows a touch warmer as
-   the swarm pulses — a soft amber breath. */
-.wxc { display: inline-block; will-change: transform; }
-.wx-fireflies .wxc {
-  animation: wx-fireflies 3s steps(6) infinite;
-  animation-delay: calc(var(--ci) * 0.11s);
-}
-@keyframes wx-fireflies {
-  0%, 100% { transform: translateY(0); text-shadow: none; }
-  50% { transform: translateY(-0.03em); text-shadow: 0 0 0.5em var(--wx-pollen); }
-}
-
-/* firefly particles — warm motes wander on one slow clock and blink on a
-   second, faster one. The stepped timing makes the light snap on and off
-   the way a firefly pulses, rather than fade. Each carries a small glow. */
+/* firefly motes — scoped to the masthead and revealed through a radial mask
+   centred on the title, so they cluster around the header text and fade out
+   toward the edges. They wander on one slow clock, blink on a faster one. */
+.masthead { position: relative; width: fit-content; max-width: 100%; }
+.masthead .hero-title { position: relative; z-index: 1; }
 .firefly-field {
   position: absolute;
-  inset: 0;
+  inset: -3.5rem -4rem;
   z-index: 0;
   pointer-events: none;
-  overflow: hidden;
+  --firefly-mask: radial-gradient(ellipse at center, #000 32%, transparent 72%);
+  -webkit-mask-image: var(--firefly-mask);
+  mask-image: var(--firefly-mask);
 }
 .firefly {
   position: absolute;
@@ -546,15 +253,330 @@ a:focus-visible, button:focus-visible {
   54%, 70% { opacity: var(--o); }
 }
 
+/* ── layout shell ───────────────────────────────────────────────────── */
+.sheet {
+  position: relative;
+  z-index: 1;
+  max-width: var(--sheet-max);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-2xl) var(--space-2xl);
+}
+
+/* ── hero ───────────────────────────────────────────────────────────── */
+.hero { padding: var(--space-2xl) 0 var(--space-xl); }
+.hero-title {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+  margin: 0;
+  font-size: clamp(56px, 13vw, 184px);
+  max-width: 11ch;            /* forces a deliberate 2–3 line stack, never clips */
+}
+.hero-lead {
+  font: var(--typography-body-lg);
+  font-size: clamp(18px, 2.2vw, 26px);
+  line-height: 1.4;
+  color: var(--color-text-soft);
+  max-width: 34ch;
+  margin: var(--space-xl) 0 0;
+}
+.hero-lead strong { color: var(--color-text-default); font-weight: 700; }
+
+/* the deal — a mono ledger of what BYOM actually trades */
+.deal {
+  margin: var(--space-2xl) 0 0;
+  border-top: 1px solid var(--color-border-default);
+  max-width: 720px;
+}
+.deal-row {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: var(--space-lg);
+  align-items: baseline;
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--color-border-quiet);
+}
+.deal-key {
+  font: var(--typography-body);
+  color: var(--color-text-quiet);
+}
+.deal-val {
+  font: var(--typography-body-lg);
+  color: var(--color-text-default);
+}
+
+/* ── editorial bands — a quiet heading in the left gutter, prose at the
+   reading measure on the right. one heading per section, no eyebrows. ─── */
+.band {
+  display: grid;
+  grid-template-columns: var(--gutter) minmax(0, 1fr);
+  gap: var(--space-2xl);
+  padding: var(--space-2xl) 0;
+  border-top: 1px solid var(--color-border-quiet);
+}
+.band-head { position: sticky; top: var(--space-xl); align-self: start; }
+.band-head h2 {
+  font: var(--typography-heading-md);
+  font-weight: 600;
+  color: var(--color-text-quiet);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.band-note {
+  font: var(--typography-body-sm);
+  color: var(--color-text-faint);
+  display: block;
+  margin-top: var(--space-xs);
+}
+
+/* ── prose ──────────────────────────────────────────────────────────── */
+.prose p { margin: 0; max-width: var(--measure); }
+.prose p + p { margin-top: var(--space-md); }
+.prose .lead-p {
+  font: var(--typography-body-lg);
+  color: var(--color-text-default);
+  max-width: var(--measure);
+}
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  text-transform: none;
+  letter-spacing: 0;
+  background: var(--color-surface-deep);
+  border: 1px solid var(--color-border-quiet);
+  padding: 0.05em 0.35em;
+}
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+
+/* ── spec list (how it works — hairline rows, accent marker) ────────── */
+.spec {
+  margin: var(--space-lg) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-border-default);
+  max-width: 760px;
+}
+.spec li {
+  position: relative;
+  padding: var(--space-md) 0 var(--space-md) var(--space-xl);
+  border-bottom: 1px solid var(--color-border-quiet);
+  font: var(--typography-body);
+  color: var(--color-text-soft);
+}
+.spec li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(var(--space-md) + 0.55em);
+  width: 7px;
+  height: 7px;
+  background: var(--color-accent-base);
+}
+.spec li strong { color: var(--color-text-default); font-weight: 600; }
+
+/* ── key-path schematic (the signature) ─────────────────────────────── */
+.flow {
+  margin: 0 0 var(--space-xl);
+  padding: var(--space-xl);
+  border: 1px solid var(--color-border-default);
+  background: var(--color-surface-claim);
+}
+.flow-path {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm) var(--space-xs);
+}
+.flow .node {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: lowercase;
+  letter-spacing: 0;
+  color: var(--color-text-default);
+  background: var(--color-surface-page);
+  border: 1px solid var(--color-border-default);
+  padding: var(--space-sm) var(--space-md);
+  white-space: nowrap;
+}
+.flow .node.is-key {
+  color: var(--color-accent-base);
+  border-color: var(--color-border-accent);
+  font-weight: 700;
+}
+.flow .arrow {
+  font-family: var(--font-mono);
+  color: var(--color-accent-base);
+  font-size: 14px;
+}
+.flow-off {
+  margin: var(--space-lg) 0 0;
+  padding-top: var(--space-md);
+  border-top: 1px dashed var(--color-border-quiet);
+  font: var(--typography-body-sm);
+  color: var(--color-text-soft);
+  max-width: var(--measure);
+}
+
+/* ── note — a quiet aside (honest claim boundaries, submission process) ── */
+.note {
+  margin: var(--space-lg) 0 0;
+  padding-left: var(--space-lg);
+  border-left: 2px solid var(--color-border-accent);
+  font: var(--typography-body-sm);
+  color: var(--color-text-soft);
+  max-width: var(--measure);
+}
+.note code { font-size: 0.86em; }
+
+/* ── links ──────────────────────────────────────────────────────────── */
+a { color: inherit; }
+.lnk {
+  color: var(--link-text-default);
+  text-decoration: underline;
+  text-decoration-color: var(--link-underline-default);
+  text-underline-offset: 3px;
+}
+.lnk:hover {
+  color: var(--link-text-hover);
+  text-decoration-color: var(--link-underline-hover);
+}
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--color-accent-base);
+  outline-offset: 2px;
+}
+::selection {
+  background: var(--color-accent-base);
+  color: var(--color-surface-page);
+}
+
+/* ── fireflies title glow (motion.weather) ──────────────────────────── */
+.wxc { display: inline-block; will-change: transform; }
+.hero-title .word { white-space: nowrap; }
+.wx-fireflies .wxc {
+  animation: wx-fireflies 3s steps(6) infinite;
+  animation-delay: calc(var(--ci) * 0.11s);
+}
+@keyframes wx-fireflies {
+  0%, 100% { transform: translateY(0); text-shadow: none; }
+  50% { transform: translateY(-0.03em); text-shadow: 0 0 0.5em var(--wx-pollen); }
+}
+
+/* ── registry — a plain list of apps that use the convention ────────── */
+.app-list {
+  margin: var(--space-lg) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-border-default);
+  max-width: 760px;
+}
+.app-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-sm) var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--color-border-quiet);
+}
+.app-name { font: var(--typography-label); flex: none; }
+.app-desc { font: var(--typography-body-sm); color: var(--color-text-soft); flex: 1; min-width: 16ch; }
+.app-links { display: flex; gap: var(--space-md); font: var(--typography-body-sm); }
+
+/* ── security invariants — a numbered list, mono numerals as the mark ── */
+.inv {
+  margin: var(--space-lg) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-border-default);
+  max-width: 760px;
+}
+.inv li {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: var(--space-md);
+  align-items: baseline;
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--color-border-quiet);
+}
+.inv-n {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-accent-base);
+}
+.inv-text { font: var(--typography-body-sm); color: var(--color-text-soft); max-width: 62ch; }
+.inv-text strong { color: var(--color-text-default); font-weight: 600; }
+
+/* ── badge ──────────────────────────────────────────────────────────── */
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  align-items: center;
+  margin: var(--space-lg) 0;
+}
+.badge-row img { display: block; }
+
+/* ── embed snippets ─────────────────────────────────────────────────── */
+.snippet-label {
+  font: var(--typography-body-sm);
+  color: var(--color-text-quiet);
+  margin: var(--space-lg) 0 var(--space-xs);
+}
+.embed-snippet {
+  font: var(--typography-body-sm);
+  font-family: var(--font-mono);
+  background: var(--color-surface-ink);
+  border: 1px solid var(--color-border-strong);
+  padding: var(--space-md) var(--space-lg);
+  overflow-x: auto;
+  white-space: pre;
+  color: var(--color-text-on-ink);
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.6;
+}
+/* ── divider (phyllotaxis seed head) ────────────────────────────────── */
+.divider { display: flex; justify-content: center; margin: var(--space-2xl) 0 0; }
+.seed { width: 38px; height: 38px; fill: var(--color-text-faint); opacity: 0.85; }
+
+/* ── colophon (footer) ──────────────────────────────────────────────── */
+.colophon {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-md);
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-border-default);
+  font: var(--typography-body-sm);
+  color: var(--color-text-soft);
+}
+.colophon span:last-child { max-width: var(--measure); }
+.colophon-mark {
+  font-family: var(--font-mono);
+  color: var(--color-accent-base);
+  flex: none;
+  letter-spacing: -0.1em;
+}
+
 /* ── reduced motion ─────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .bloom i { animation: none; }
+  .grid i { animation: none; }
   .firefly { animation: none; opacity: 0; }
   .wx-fireflies .wxc { animation: none; }
 }
-@media (max-width: 720px) {
-  .sheet { padding: var(--space-xl); }
-  .masthead .big { white-space: normal; }
-  .badge-grid { grid-template-columns: 1fr; }
-  .registry-list { grid-template-columns: 1fr; }
+
+/* ── responsive ─────────────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .band { grid-template-columns: 1fr; gap: var(--space-md); }
+  .band-head { position: static; }
+  .band-head h2 { color: var(--color-text-default); }
+}
+@media (max-width: 640px) {
+  .sheet { padding: var(--space-lg) var(--space-lg) var(--space-2xl); }
+  .hero-title { font-size: clamp(40px, 12vw, 64px); max-width: none; }
+  .hero-lead { max-width: none; }
+  .deal-row { grid-template-columns: 1fr; gap: var(--space-xs); }
 }

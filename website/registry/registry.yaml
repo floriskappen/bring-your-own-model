@@ -26,12 +26,12 @@ apps:
         description: Generates a longer, reasoned brief on a single company when you want more than the card.
         category: frontier
 
-  - name: AI-laser
-    url: https://ai-laser.example
+  - name: e-lezer
+    url: https://e-lezer.example
     description: E-reader with optional model-powered reading aids.
     pinned_constitution_version: v1.0.0
-    integration_doc_url: https://ai-laser.example/BYOM-INTEGRATION.md
-    source_url: https://github.com/example/ai-laser
+    integration_doc_url: https://e-lezer.example/BYOM-INTEGRATION.md
+    source_url: https://github.com/example/e-lezer
     badge_variant: light
     model_powered_features:
       - name: Inline gloss

@@ -1,11 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="168" height="44" viewBox="0 0 168 44" role="img" aria-label="BYOM badge — Bring Your Own Model">
-  <title>BYOM badge (dark)</title>
-  <rect x="0.5" y="0.5" width="167" height="43" rx="8" fill="#161616" stroke="#2e2e2e"/>
-  <g transform="translate(9,8) scale(0.875)" fill="#f4f4f4">
-    <rect x="4" y="9" width="12" height="14" rx="3"/>
-    <rect x="13" y="13" width="7" height="6" rx="1.5"/>
-    <rect x="18" y="9" width="10" height="14" rx="3"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="168" height="44" viewBox="0 0 168 44" role="img" aria-label="byom badge — bring your own model">
+  <title>byom badge (dark)</title>
+  <rect x="0.5" y="0.5" width="167" height="43" rx="8" fill="#1B2028" stroke="#E8EBF0" stroke-opacity="0.16"/>
+  <rect x="2" y="40" width="164" height="2.5" rx="1.25" fill="#6E83A0"/>
+  <!-- plug → socket glyph (monochrome) -->
+  <g transform="translate(12,5.2) scale(1.4)" fill="#E8EBF0">
+    <rect x="1.5" y="7" width="7" height="10" rx="2.4"/>
+    <rect x="0" y="10.6" width="2" height="2.8" rx="1"/>
+    <rect x="8.4" y="8.6" width="3.8" height="1.7" rx="0.85"/>
+    <rect x="8.4" y="13.7" width="3.8" height="1.7" rx="0.85"/>
+    <rect x="14" y="4.2" width="8.5" height="15.6" rx="3"/>
+    <rect x="16.7" y="7.6" width="2" height="3.6" rx="1" fill="#1B2028"/>
+    <rect x="16.7" y="12.8" width="2" height="3.6" rx="1" fill="#1B2028"/>
   </g>
-  <text x="46" y="22" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#f4f4f4" text-rendering="geometricPrecision">BYOM</text>
-  <text x="46" y="35" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="10" fill="#9a9a9a" text-rendering="geometricPrecision">Bring Your Own Model</text>
+  <text x="54" y="22" font-family="Archivo, 'Helvetica Neue', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="17" font-weight="700" letter-spacing="-0.3" fill="#E8EBF0" text-rendering="geometricPrecision">byom</text>
+  <text x="54" y="34.5" font-family="Archivo, 'Helvetica Neue', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="9.5" fill="#9AA3B5" text-rendering="geometricPrecision">bring your own model</text>
 </svg>

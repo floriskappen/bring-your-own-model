@@ -1,17 +1,16 @@
 import { defineConfig } from 'astro/config';
+import { SITE } from './src/site.mjs';
 
 export default defineConfig({
-  site: 'https://BYOM-SITE',
+  site: SITE,
   output: 'static',
   build: {
+    // Keep stylesheets external (linked, not inlined into <head>) so the bulk
+    // of the site's CSS is covered by the strict style-src 'self'. The CSP
+    // still needs 'unsafe-inline' for one reason only: the masthead firefly
+    // effect emits build-time inline `style` attributes (per-particle CSS
+    // custom properties). That allowance is documented in .design/DESIGN.md
+    // and in the CSP comment in src/layouts/Base.astro.
     inlineStylesheets: 'never',
-  },
-  vite: {
-    css: {
-      // No CSS preprocessor needed — the design system ships plain CSS variables.
-      // All styles are authored as global CSS, imported in the layout.
-      // Astro extracts them to linked .css files (inlineStylesheets: 'never')
-      // so the strict CSP can set style-src 'self' without 'unsafe-inline'.
-    },
   },
 });
