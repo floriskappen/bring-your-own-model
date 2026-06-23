@@ -1,0 +1,33 @@
+---
+// Breathing grid — hairline cells whose opacity pulses on desynced clocks
+// (ported from the zoo's atmosphere.grid.breathing). Generated at build time,
+// no client JS (CSP-safe under script-src 'none').
+//
+// Unlike the bloom/grain, the grid is NOT a full-page fixed layer: it is
+// anchored to the masthead block (.hero-head) so it sits behind the title and
+// subtitle and dissolves just below them, leaving the rest of the page on
+// clean paper. Anchoring to the header content (rather than the viewport) is
+// what keeps it correct across breakpoints — it scales with the header.
+
+const r3 = (n: number): string => n.toFixed(3);
+const r2 = (n: number): string => n.toFixed(2);
+const lcg = (n: number): number => ((n * 9301 + 49297) % 233280) / 233280;
+
+const COLS = 16;
+const ROWS = 8;
+const cells = Array.from({ length: COLS * ROWS }, (_, i) => {
+  const a = r3(0.04 + lcg(i * 9301 + 49297) * 0.05); // low  0.040–0.090
+  const b = r3(0.09 + lcg(i * 1597 + 51749) * 0.06); // high 0.090–0.150
+  const d = r2(7 + lcg(i * 7919 + 12553) * 9);       // 7–16s
+  const dl = r2(-lcg(i * 9301 + 49297) * 12);        // desync offset
+  return { a, b, d, dl };
+});
+---
+
+<div class="grid-field" aria-hidden="true">
+  <div class="grid" style={`--cols:${COLS};--rows:${ROWS}`}>
+    {cells.map((c) => (
+      <i style={`--a:${c.a};--b:${c.b};--d:${c.d}s;--dl:${c.dl}s`}></i>
+    ))}
+  </div>
+</div>

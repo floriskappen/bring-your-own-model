@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Fireflies from '../components/Fireflies.astro';
+import Grid from '../components/Grid.astro';
 import { SITE } from '../site.mjs';
 import jsyaml from 'js-yaml';
 import { readFileSync } from 'node:fs';
@@ -45,12 +46,15 @@ const htmlEmbed = `<a href="${SITE}/" rel="noopener">
 
 <Base title="" path="/">
   <section class="hero">
-    <Fireflies text="bring your own model" />
-    <p class="hero-lead">
-      free software for the llm era. the <strong>app is free</strong>; the user
-      <strong>brings their own model</strong> for the parts that need it, and pays
-      only for the inference they personally use.
-    </p>
+    <div class="hero-head">
+      <Grid />
+      <Fireflies text="bring your own model" />
+      <p class="hero-lead">
+        free software for the llm era. the <strong>app is free</strong>; the user
+        <strong>brings their own model</strong> for the parts that need it, and pays
+        only for the inference they personally use.
+      </p>
+    </div>
 
     <dl class="deal">
       <div class="deal-row">

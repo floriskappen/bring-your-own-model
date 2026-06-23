@@ -151,7 +151,8 @@ body::before {
 /* ── atmosphere (full-bleed ambient layer — Atmosphere.astro) ────────── */
 .atmosphere { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
-/* breathing grid (atmosphere.grid.breathing) */
+/* breathing grid (atmosphere.grid.breathing) — anchored to the masthead via
+   .grid-field (see the hero section), not full-bleed. */
 @property --bo { syntax: '<number>'; initial-value: 0.08; inherits: false; }
 .grid {
   position: absolute;
@@ -160,18 +161,6 @@ body::before {
   grid-template-columns: repeat(var(--cols), 1fr);
   grid-template-rows: repeat(var(--rows), 1fr);
   opacity: 0.7;
-  /* Hide the grid behind the centred content column (±half the sheet width)
-     and fade it in gradually over a 140px band out toward the page edges, so
-     it never appears abruptly. Grain + bloom are unaffected. */
-  --grid-mask: linear-gradient(to right,
-    #000 0,
-    #000 calc(50% - var(--sheet-max) / 2 - 140px),
-    transparent calc(50% - var(--sheet-max) / 2),
-    transparent calc(50% + var(--sheet-max) / 2),
-    #000 calc(50% + var(--sheet-max) / 2 + 140px),
-    #000 100%);
-  -webkit-mask-image: var(--grid-mask);
-  mask-image: var(--grid-mask);
 }
 .grid i {
   --bo: var(--a);
@@ -264,6 +253,33 @@ body::before {
 
 /* ── hero ───────────────────────────────────────────────────────────── */
 .hero { padding: var(--space-2xl) 0 var(--space-xl); }
+
+/* The breathing grid is a backdrop for the header block only. .grid-field is
+   anchored to .hero-head (title + subtitle): it bleeds up to the top of the
+   page and a fixed runway below the subtitle, then a vertical mask dissolves
+   it just after the subtitle so the rest of the page sits on clean paper.
+   Anchoring to the content (not the viewport) keeps it correct responsively —
+   it grows and shrinks with the header. */
+.hero-head { position: relative; }
+.hero-head > .masthead,
+.hero-head > .hero-lead { position: relative; z-index: 1; }
+.grid-field {
+  --grid-fade: 120px;            /* dissolve runway below the subtitle */
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(-1 * (var(--space-xl) + var(--space-2xl)));  /* reach the page top */
+  bottom: calc(-1 * var(--grid-fade));
+  z-index: 0;
+  pointer-events: none;
+  --grid-mask: linear-gradient(to bottom,
+    #000 0,
+    #000 calc(100% - var(--grid-fade)),
+    transparent 100%);
+  -webkit-mask-image: var(--grid-mask);
+  mask-image: var(--grid-mask);
+}
+
 .hero-title {
   font-family: var(--font-sans);
   font-weight: 800;
