@@ -56,6 +56,38 @@ A BYOM badge means an app follows the pattern and those invariants. It is not pr
 
 ---
 
+## The money
+
+You can see what you spend, as you spend it.
+
+- **Live cost.** Model-powered actions show their real cost as they run — actual usage, never an estimate.
+- **Breakdown.** Spend is attributable per request, and where the app can, per feature.
+- **History.** A local record of what you've spent, kept on your device next to your key setup. The developer never sees it.
+- **No lost work.** If a paid action is in progress, the app warns before you leave, so you don't pay for work that gets thrown away.
+
+---
+
+## Getting a key
+
+BYOM assumes you can bring model access, not that you already have it. An app built on BYOM should walk a first-time user through it: what a key is, getting one from a provider (OpenRouter in v1), setting a spend limit there, and connecting it.
+
+If that path isn't clear to someone who's never seen an API key, the app isn't done.
+
+---
+
+## In practice
+
+A worked example, end to end:
+
+1. You open the app and use it. Browsing, reading, navigating — free.
+2. A feature needs a model. The app asks you to connect a key, and shows you how to get one if you don't have it.
+3. You set a budget. The app guards against runaway spend; set a hard limit at your provider too.
+4. The feature runs. You see the cost as it works, recorded locally.
+
+More examples are coming as apps adopt the pattern. The registry lists the ones that exist today.
+
+---
+
 ## The registry
 
 A list of apps that follow the pattern. Worth keeping even with one entry; anyone else adopting it is a bonus.

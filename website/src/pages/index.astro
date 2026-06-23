@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Fireflies from '../components/Fireflies.astro';
 import Grid from '../components/Grid.astro';
-import { SITE } from '../site.mjs';
+import { SITE, REPO } from '../site.mjs';
 import jsyaml from 'js-yaml';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -102,7 +102,7 @@ const htmlEmbed = `<a href="${SITE}/" rel="noopener">
   </section>
 
   <section class="band" id="how">
-    <div class="band-head"><h2>how it works</h2><span class="band-note">v1: openrouter</span></div>
+    <div class="band-head"><h2>how it works<a class="ref" href="#fn-1" id="ref-1" aria-label="see reference 1">1</a></h2><span class="band-note">v1: openrouter</span></div>
     <div class="band-content">
       <figure class="flow">
         <div class="flow-path">
@@ -128,7 +128,7 @@ const htmlEmbed = `<a href="${SITE}/" rel="noopener">
   </section>
 
   <section class="band" id="security">
-    <div class="band-head"><h2>security</h2></div>
+    <div class="band-head"><h2>security<a class="ref" href="#fn-2" id="ref-2" aria-label="see reference 2">2</a></h2></div>
     <div class="band-content">
       <div class="prose">
         <p class="lead-p">keeping the key in the browser is a privacy and control win, not a cryptographic guarantee.</p>
@@ -148,8 +148,50 @@ const htmlEmbed = `<a href="${SITE}/" rel="noopener">
     </div>
   </section>
 
+  <section class="band" id="money">
+    <div class="band-head"><h2>the money<a class="ref" href="#fn-3" id="ref-3" aria-label="see reference 3">3</a></h2></div>
+    <div class="band-content">
+      <div class="prose">
+        <p class="lead-p">you can see what you spend, as you spend it.</p>
+      </div>
+      <ul class="spec">
+        <li><strong>live cost.</strong> model-powered actions show their real cost as they run — actual usage, never an estimate.</li>
+        <li><strong>breakdown.</strong> spend is attributable per request, and where the app can, per feature.</li>
+        <li><strong>history.</strong> a local record of what you've spent, kept on your device next to your key setup. the developer never sees it.</li>
+        <li><strong>no lost work.</strong> if a paid action is in progress, the app warns before you leave, so you don't pay for work that gets thrown away.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band" id="key">
+    <div class="band-head"><h2>getting a key<a class="ref" href="#fn-4" id="ref-4" aria-label="see reference 4">4</a></h2></div>
+    <div class="band-content">
+      <div class="prose">
+        <p class="lead-p">byom assumes you can bring model access, not that you already have it.</p>
+        <p>an app built on byom should walk a first-time user through it: what a key is, getting one from a provider (openrouter in v1), setting a spend limit there, and connecting it.</p>
+      </div>
+      <p class="note">if that path isn't clear to someone who's never seen an api key, the app isn't done.</p>
+    </div>
+  </section>
+
+  <section class="band" id="practice">
+    <div class="band-head"><h2>in practice</h2></div>
+    <div class="band-content">
+      <div class="prose">
+        <p class="lead-p">a worked example, end to end:</p>
+      </div>
+      <ol class="inv">
+        <li><span class="inv-n">1</span><span class="inv-text">you open the app and use it. browsing, reading, navigating — free.</span></li>
+        <li><span class="inv-n">2</span><span class="inv-text">a feature needs a model. the app asks you to connect a key, and shows you how to get one if you don't have it.</span></li>
+        <li><span class="inv-n">3</span><span class="inv-text">you set a budget. the app guards against runaway spend; set a hard limit at your provider too.</span></li>
+        <li><span class="inv-n">4</span><span class="inv-text">the feature runs. you see the cost as it works, recorded locally.</span></li>
+      </ol>
+      <p class="note">more examples are coming as apps adopt the pattern. the registry lists the ones that exist today.</p>
+    </div>
+  </section>
+
   <section class="band" id="badge">
-    <div class="band-head"><h2>the badge</h2></div>
+    <div class="band-head"><h2>the badge<a class="ref" href="#fn-5" id="ref-5" aria-label="see reference 5">5</a></h2></div>
     <div class="band-content">
       <div class="prose">
         <p>an embeddable mark: a plug connecting into a two-slot socket. apps that follow the pattern can show it. light, dark, and small variants live under <code>/assets/badge/</code>.</p>
@@ -174,20 +216,24 @@ const htmlEmbed = `<a href="${SITE}/" rel="noopener">
         <p>apps that use this convention. a listing says an app follows the pattern and has a <code>BYOM-INTEGRATION.md</code> — it is not a security audit.</p>
       </div>
 
-      <ul class="app-list">
-        {apps.map((app) => (
-          <li>
-            <a href={app.url} class="app-name lnk" rel="noopener">{app.name}</a>
-            <span class="app-desc">{app.description}</span>
-            <span class="app-links">
-              <a href={app.source_url} class="lnk" rel="noopener">source</a>
-              <a href={app.integration_doc_url} class="lnk" rel="noopener">integration</a>
-            </span>
-          </li>
-        ))}
-      </ul>
+      {apps.length > 0 ? (
+        <ul class="app-list">
+          {apps.map((app) => (
+            <li>
+              <a href={app.url} class="app-name lnk" rel="noopener">{app.name}</a>
+              <span class="app-desc">{app.description}</span>
+              <span class="app-links">
+                <a href={app.source_url} class="lnk" rel="noopener">source</a>
+                <a href={app.integration_doc_url} class="lnk" rel="noopener">integration</a>
+              </span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="note">no apps listed yet. the registry opens as apps adopt the pattern and publish.</p>
+      )}
 
-      <p class="note">to add an app, edit <code>registry.yaml</code> and open a pr; ci validates it against the schema. see the <a href="https://github.com/floriskappen/bring-your-own-model/blob/main/website/registry/README.md" class="lnk">registry readme</a>.</p>
+      <p class="note">to add an app, edit <code>registry.yaml</code> and open a pr; ci validates it against the schema. see the <a href={`${REPO}/blob/main/website/registry/README.md`} class="lnk" rel="noopener">registry readme</a>.</p>
     </div>
   </section>
 
@@ -204,4 +250,15 @@ const htmlEmbed = `<a href="${SITE}/" rel="noopener">
       <circle cx="30" cy="22" r="1.5" />
     </svg>
   </div>
+
+  <section class="footnotes" aria-label="references">
+    <ol>
+      <li id="fn-1"><a href="#ref-1" class="ref-back" aria-label="back to reference 1">↩</a> the provider model, categories, and the call path. <a href={`${REPO}/blob/main/constitution/01-provider-model.md`} class="lnk" rel="noopener">01-provider-model.md</a></li>
+      <li id="fn-2"><a href="#ref-2" class="ref-back" aria-label="back to reference 2">↩</a> the six security invariants. <a href={`${REPO}/blob/main/constitution/02-security-invariants.md`} class="lnk" rel="noopener">02-security-invariants.md</a></li>
+      <li id="fn-3"><a href="#ref-3" class="ref-back" aria-label="back to reference 3">↩</a> cost transparency. <a href={`${REPO}/blob/main/constitution/06-cost-transparency.md`} class="lnk" rel="noopener">06-cost-transparency.md</a></li>
+      <li id="fn-4"><a href="#ref-4" class="ref-back" aria-label="back to reference 4">↩</a> the wizard and onboarding contract. <a href={`${REPO}/blob/main/constitution/03-wizard-ux-contract.md`} class="lnk" rel="noopener">03-wizard-ux-contract.md</a></li>
+      <li id="fn-5"><a href="#ref-5" class="ref-back" aria-label="back to reference 5">↩</a> the badge and registry. <a href={`${REPO}/blob/main/constitution/04-badge-and-registry.md`} class="lnk" rel="noopener">04-badge-and-registry.md</a></li>
+    </ol>
+    <p class="footnotes-all"><a href={`${REPO}/tree/main/constitution`} class="lnk" rel="noopener">read the full constitution →</a></p>
+  </section>
 </Base>
