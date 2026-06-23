@@ -14,6 +14,8 @@ BYOM removes the dilemma. The user already has, or can get, access to a model. T
 
 This matters specifically for **optional-but-powered** functionality. The whole app works without a model — the model only animates certain features. A user can browse, read, navigate, and use the scaffolding entirely for free. The smart features are unlocked by connecting a model. Inference is opt-in, not a wall in front of the product.
 
+This is the motivating case, not a hard rule. An app whose core is entirely model-dependent can still follow the pattern. The narrower requirement is that features which do not need inference are not gated behind a key — the non-model parts stay usable without connecting.
+
 ## Free software for the LLM era
 
 The deeper framing: this is free software for the age of LLMs and agents. Traditional software is often inert without the thing that animates it. Now the app is the **scaffold and interface**, and the model is what ties it together and makes it fully useful. The tooling is a well-built interface and data layer, plus an optional model the user supplies, working together.

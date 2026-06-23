@@ -4,6 +4,8 @@
 
 An application that follows this constitution may display a **BYOM badge** linking back to the constitution site. The badge signals: this app follows the BYOM pattern — the user brings their own model, the developer never touches the key or the money, and the app follows the security invariants.
 
+The badge is for **free and open-source** apps. To display it, the app must be free (no paywall, subscription, or developer-side metering) and its source open. The pattern itself can be implemented by anything, but the badge and the registry earn this stance: BYOM exists to keep these tools free.
+
 ### Icon direction
 
 The badge glyph should evoke **connect your own model** — a model/socket/plug-into-slot idea. Deliberately avoid:
@@ -26,3 +28,5 @@ The position for now: browser-local keys, a clear public security page explainin
 ## The registry
 
 The constitution site lists participating apps. The registry is designed to be worth maintaining at **N=1** — the value is real even if the only listed apps are the builder's own. External adopters are a bonus, never a design assumption. Nothing about the registry's design should presuppose outside adoption.
+
+A listing requires the app be free and open source, follow the invariants, and ship a `BYOM-INTEGRATION.md` — the same bar as the badge. A listing is not a security audit.

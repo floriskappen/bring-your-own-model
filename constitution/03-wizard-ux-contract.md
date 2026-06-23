@@ -22,6 +22,16 @@ This is the contract for the connect/onboarding flow — the experience of a use
 
 6. **Tell the truth about safety.** Link to or restate the honest threat model: browser-local is a privacy/control win, not a cryptographic guarantee. Do not imply more safety than exists.
 
+## After connecting
+
+The wizard is the first-run instance of a persistent connection surface, not a one-time door. After connecting, the user can always reach a way to: change the model (within the feature's category), adjust the budget, clear or rotate the key, and view local spend history. A model connection is not set-and-forget; the user stays in control of it for as long as it is set.
+
+## When a request fails
+
+A model-powered feature will hit provider errors — 401 (bad or revoked key), 429, 5xx, model unavailable, context-length exceeded. The app surfaces these plainly, in the user's language, without dumping raw provider payloads.
+
+On an auth failure (401), the app treats the stored key as stale: it clears the in-memory key and prompts the user to re-connect, rather than retrying silently. And error handling never leaks the key or prompt content to logs, telemetry, or error reports — this extends invariant 5 to the failure path.
+
 ## Tone
 
 Plain and clear. Explain things as they are. Do not hype, do not pad, do not pretend the security story is stronger than it is. Assume the user can grasp the value without being sold to.

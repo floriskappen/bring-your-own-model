@@ -18,7 +18,13 @@ The key never touches the developer's infrastructure. It lives in the user's bro
 
 5. **Never log the key, never log key-linked prompts.** Neither the key nor prompt content tied to the key is written to any log.
 
-6. **Pre-flight token estimation and enforceable budget limits.** Before a request, estimate its token cost. Enforce a user-visible, user-settable budget/allowance so that connecting a model cannot silently burn through the user's balance — including in the case of a bug that spams requests. The user can set an allowance; the app tracks spend against it and stops when it is reached.
+6. **Pre-flight token estimation and enforceable budget limits.** Before a request, estimate its token cost and check it against a user-set, cumulative budget — accounting for in-flight requests, so concurrent or multi-step calls cannot blow past the ceiling before spend catches up. The app stops at the limit, including when a bug spams requests. This ceiling is a best-effort guard against estimates; see "The honest budget boundary" below for what it does and does not guarantee.
+
+## Data egress
+
+The key is not the only thing that stays between the user and the provider. Prompt content — what the user sends to the model — goes only to the provider too. No third-party analytics, telemetry, or error-reporting endpoint receives the key or the prompts; the app sends inference data to exactly one place.
+
+This is a mandatory rule, not the key-protection invariants restated: the key (invariant 2) and the prompts are both egress-bound to the provider alone. Note that the provider routes to the model vendor behind the chosen model, so the provider and that vendor see the prompts by design — the app adds no one else to the path.
 
 ## The honest threat model
 
@@ -27,3 +33,9 @@ Browser-local keys are a **privacy and control win, not an absolute security gua
 That is precisely why invariants 3, 4, and 1 (strict CSP, minimal third-party JS, in-memory default) are load-bearing. They belong here, in the shared constitution, rather than being left to each app to rediscover.
 
 Do not overstate the guarantee anywhere in an app's UI or docs. State plainly that this is a meaningful improvement in privacy and control, not a cryptographic guarantee against a determined attacker. See `04-badge-and-registry.md` for the matching limits on what the badge can claim.
+
+## The honest budget boundary
+
+The budget ceiling in invariant 6 is enforced on pre-flight estimates, and estimates can be wrong — especially under concurrent or multi-step agentic requests, even with the cumulative, in-flight-aware check. It is a best-effort guard against runaway spend, not a billing guarantee that spend can never exceed the ceiling.
+
+The hard cap is the spend limit the user sets at the provider during onboarding. The app ceiling and the provider limit are two layers: the app guards within a session; the provider caps the account. Require both — the onboarding flow does — and do not imply the app ceiling alone can stop all overrun.
