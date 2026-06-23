@@ -15,7 +15,7 @@ phases that roughly need to happen in order, but several can run in parallel onc
 - The website is deployed, lightweight, CSP-locked, and tells the honest safety story.
 - The badge exists as a real artifact with copy-paste embed snippets and an honest claim boundary.
 - The registry has a defined entry schema and at least the two seed apps listed.
-- At least one of Bedrijfskompas / AI-laser has a real `BYOM-INTEGRATION.md` that the integration
+- At least one of Bedrijfskompas / e-lezer has a real `BYOM-INTEGRATION.md` that the integration
   guide actually produced — the guide is validated against reality, not just written.
 
 ---
@@ -38,7 +38,8 @@ Turn the staged drafts into the real repo layout. The brief's target tree:
 │   ├── 02-security-invariants.md
 │   ├── 03-wizard-ux-contract.md
 │   ├── 04-badge-and-registry.md
-│   └── 05-integration-guide.md
+│   ├── 05-integration-guide.md
+│   └── 06-cost-transparency.md
 └── website/                    ← movement-facing static site
     └── ...
 ```
@@ -59,7 +60,7 @@ Tasks:
 
 The drafts are strong; this is a tightening pass, not a rewrite.
 
-- [x] Consistency pass across all six docs: one voice (plain, unhyped), consistent terminology
+- [x] Consistency pass across all seven docs: one voice (plain, unhyped), consistent terminology
       (frontier/worker, "model category", "invariant N", "BYOM-INTEGRATION.md").
 - [x] Verify the six security invariants are stated identically wherever they appear (constitution,
       website safety copy, badge claims).
@@ -90,7 +91,8 @@ it at N=1.
       `BYOM-INTEGRATION.md`, pinned constitution version, repo/source link).
 - [x] Choose a data format that drives the site (e.g. a `registry.json` / `registry.yaml` the website
       renders), so adding an app is a data edit, not a template edit.
-- [x] Seed the two entries: **Bedrijfskompas** and **AI-laser**.
+- [ ] Add entries as apps publish (**Bedrijfskompas**, **e-lezer**) — the registry ships empty
+      until then; adding an app is a data edit.
 - [x] Define the submission process (PR-based: add an entry, CI validates it against the schema).
 - [x] Optional: a schema validator in CI so malformed entries can't merge.
 
@@ -115,7 +117,7 @@ Lightweight static site, built from `website/COPY.md`. Copy is **movement-neutra
 
 The integration pattern is the whole reusability bet. v1 isn't done until it's been run for real once.
 
-- [ ] Author a real `BYOM-INTEGRATION.md` in **Bedrijfskompas** (or AI-laser) by following
+- [ ] Author a real `BYOM-INTEGRATION.md` in **Bedrijfskompas** (or e-lezer) by following
       `05-integration-guide.md` literally — list model-powered features, categories, wizard wiring,
       invariant mapping, budget surfacing, pinned version.
 - [ ] Feed every friction point back into `05-integration-guide.md` until the guide produces a correct

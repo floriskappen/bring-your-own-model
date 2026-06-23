@@ -18,6 +18,7 @@ Read everything under [`constitution/`](./constitution/), in order:
 4. [`03-wizard-ux-contract.md`](./constitution/03-wizard-ux-contract.md) — the connect/onboarding UX contract
 5. [`04-badge-and-registry.md`](./constitution/04-badge-and-registry.md) — the badge and the registry
 6. [`05-integration-guide.md`](./constitution/05-integration-guide.md) — how to author this app's own `BYOM-INTEGRATION.md`
+7. [`06-cost-transparency.md`](./constitution/06-cost-transparency.md) — spend visibility: real cost, local history, no lost work
 
 ## What to ignore
 

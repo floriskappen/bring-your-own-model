@@ -41,6 +41,7 @@ The normative content lives in [`constitution/`](./constitution/), one file per 
 4. [Wizard UX contract](./constitution/03-wizard-ux-contract.md)
 5. [Badge and registry](./constitution/04-badge-and-registry.md)
 6. [Integration guide](./constitution/05-integration-guide.md) — how a consuming repo authors its own `BYOM-INTEGRATION.md`
+7. [Cost transparency](./constitution/06-cost-transparency.md) — spend visibility: real cost, local history, no lost work
 
 A thin index also lives at [`CONSTITUTION.md`](./CONSTITUTION.md).
 
@@ -50,5 +51,5 @@ Early. OSS-first, no monetization assumed — built at N=1 to make a multi-app l
 the security rules once. External adopters are a bonus, never a design assumption.
 
 - **Constitution version:** see [`VERSION`](./VERSION) — targeting `v1.0.0`.
-- **First apps:** Bedrijfskompas (company map + agentic CV matching) and AI-laser (e-reader).
+- **First apps:** Bedrijfskompas (company map + agentic CV matching) and e-lezer (e-reader).
 - **What's left to ship v1:** see [`ROADMAP.md`](./ROADMAP.md).

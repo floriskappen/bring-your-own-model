@@ -10,3 +10,4 @@ First release of the BYOM constitution.
 - Wizard UX contract.
 - Badge and registry, with honest limits on what the badge can claim.
 - Integration guide and the `BYOM-INTEGRATION.md` pattern for consuming repos.
+- Cost transparency (`06`): live cost from real usage, per-request attribution, local spend history, no lost work.
