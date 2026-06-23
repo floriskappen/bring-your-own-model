@@ -14,8 +14,8 @@
     },
     "apps": {
       "type": "array",
-      "minItems": 1,
-      "description": "List of participating BYOM apps. Designed to be worth maintaining at N=1; no minimum count beyond one.",
+      "minItems": 0,
+      "description": "List of participating BYOM apps. May be empty before any app is published; designed to be worth maintaining at N=1 once apps exist.",
       "items": { "$ref": "#/$defs/app" }
     }
   },
@@ -70,7 +70,7 @@
         "model_powered_features": {
           "type": "array",
           "minItems": 1,
-          "description": "The optional-but-powered features. Non-empty: a BYOM app has at least one model-powered feature, and the whole app works without any of them.",
+          "description": "The model-powered features. Non-empty: a BYOM app has at least one model-powered feature.",
           "items": { "$ref": "#/$defs/feature" }
         },
         "badge_variant": {

@@ -10,33 +10,6 @@
 
 schema_version: v1.0.0
 
-apps:
-  - name: Bedrijfskompas
-    url: https://bedrijfskompas.example
-    description: Company map overview with agentic, personalized matching against your CV.
-    pinned_constitution_version: v1.0.0
-    integration_doc_url: https://bedrijfskompas.example/BYOM-INTEGRATION.md
-    source_url: https://github.com/example/bedrijfskompas
-    badge_variant: light
-    model_powered_features:
-      - name: CV-matched company suggestions
-        description: Ranks companies on the map by fit to your CV; asks the model to extract and match signal.
-        category: worker
-      - name: Deep-dive company brief
-        description: Generates a longer, reasoned brief on a single company when you want more than the card.
-        category: frontier
-
-  - name: e-lezer
-    url: https://e-lezer.example
-    description: E-reader with optional model-powered reading aids.
-    pinned_constitution_version: v1.0.0
-    integration_doc_url: https://e-lezer.example/BYOM-INTEGRATION.md
-    source_url: https://github.com/example/e-lezer
-    badge_variant: light
-    model_powered_features:
-      - name: Inline gloss
-        description: Explains a selected term or passage inline, in the voice of the book.
-        category: worker
-      - name: Chapter recap
-        description: Summarizes the chapter you just finished, for a quick refresher before picking up again.
-        category: worker
+# Empty until apps are published. The BYOM repo ships before the apps; entries
+# are added here as apps go live. Adding an app is a data edit — see README.md.
+apps: []

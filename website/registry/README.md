@@ -23,7 +23,7 @@ directory defines the concrete registry artifact.
 | Field | Required | Type | Notes |
 | --- | --- | --- | --- |
 | `schema_version` | yes | string | Semver version of the **registry entry schema itself** (`vX.Y.Z`), so the format can evolve. Bumped when required fields or validation rules change. Independent of the constitution version. |
-| `apps` | yes | array | The list of apps. Min one entry. |
+| `apps` | yes | array | The list of apps. May be empty before any app is published. |
 
 ### Per app
 
@@ -35,7 +35,7 @@ directory defines the concrete registry artifact.
 | `pinned_constitution_version` | yes | string | Released constitution tag the app is built against (`vX.Y.Z`) — the submodule pin. |
 | `integration_doc_url` | yes | string | Link to the app's `BYOM-INTEGRATION.md` (rendered or raw). Per `05-integration-guide.md`, every BYOM app authors this doc at its repo root. Must be `https://`. |
 | `source_url` | yes | string | Repo or source link. Must be `https://`. |
-| `model_powered_features` | yes | array | The optional-but-powered features. Non-empty: a BYOM app has at least one model-powered feature, and the whole app works without any of them. |
+| `model_powered_features` | yes | array | The model-powered features. Non-empty: a BYOM app has at least one model-powered feature. |
 | `badge_variant` | no | enum | Which badge variant the app displays: `light` \| `dark` \| `light-small` \| `dark-small`. Defaults to `light` (standard). |
 | `notes` | no | string | Free-text notes (launch status, platform caveats). Keep brief. |
 
@@ -68,9 +68,9 @@ Submissions are **PR-based**. To add or update an app:
    merge on any violation.
 
 4. **Open the PR.** Include the app's live URL and `BYOM-INTEGRATION.md` link in the PR body so a
-   reviewer can spot-check. A maintainer reviews for: the app genuinely follows the pattern and the
-   six security invariants, the `BYOM-INTEGRATION.md` exists and is honest, the pinned constitution
-   version is a real released tag, and the entry matches the schema.
+   reviewer can spot-check. A maintainer reviews for: the app is free and open source, genuinely
+   follows the pattern and the six security invariants, the `BYOM-INTEGRATION.md` exists and is
+   honest, the pinned constitution version is a real released tag, and the entry matches the schema.
 
 5. **Merge.** The site renders from the merged `registry.yaml`.
 
