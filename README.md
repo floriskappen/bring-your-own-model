@@ -50,6 +50,6 @@ A thin index also lives at [`CONSTITUTION.md`](./CONSTITUTION.md).
 Early. OSS-first, no monetization assumed — built at N=1 to make a multi-app life easier and encode
 the security rules once. External adopters are a bonus, never a design assumption.
 
-- **Constitution version:** see [`VERSION`](./VERSION) — targeting `v1.0.0`.
+- **Released:** `v0.1.0` — first pre-v1 cut, cut so a consuming app can submodule it and validate the integration guide (Phase 5). `v1.0.0` remains the target.
 - **First apps:** Bedrijfskompas (company map + agentic CV matching) and e-lezer (e-reader).
 - **What's left to ship v1:** see [`ROADMAP.md`](./ROADMAP.md).

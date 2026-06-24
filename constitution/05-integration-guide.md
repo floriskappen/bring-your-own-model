@@ -113,6 +113,6 @@ To list an app in the registry, open a PR editing `website/registry/registry.yam
 
 ## Submodule and versioning
 
-This constitution is consumed as a **git submodule pinned to a release tag** (e.g. `v1.0.0`). Consuming repos pin a version deliberately.
+This constitution is consumed as a **git submodule pinned to a release tag** (e.g. `v0.1.0`). Consuming repos pin a version deliberately.
 
 When the constitution releases a new version, the update flow in a consuming repo is: pull the new version of the submodule, then re-check the app against the changed constitution and update the implementation throughout where needed. The pinned version in `BYOM-INTEGRATION.md` is updated to match. This is a deliberate, reviewed update — not an automatic float to latest.

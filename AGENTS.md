@@ -6,7 +6,7 @@
 
 This is **not** a package, framework, plugin, or component. There is nothing to install. BYOM (Bring Your Own Model) is an **idea you embed into a project** — a constitution of concepts, invariants, and contracts. The technical implementation is left to each application, because applications differ in framework and stack.
 
-This repository is typically consumed as a **git submodule**, pinned to a released version tag (e.g. `v1.0.0`), the same way a shared design system is consumed. Consuming repos pin a version and update deliberately.
+This repository is typically consumed as a **git submodule**, pinned to a released version tag (e.g. `v0.1.0`), the same way a shared design system is consumed. Consuming repos pin a version and update deliberately.
 
 ## What to read
 

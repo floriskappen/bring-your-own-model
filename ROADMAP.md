@@ -7,6 +7,10 @@ real, usable interfaces; and at least one consuming app has proven the integrati
 This roadmap is the bridge between the drafted content and a released repo. Items are grouped into
 phases that roughly need to happen in order, but several can run in parallel once the structure exists.
 
+> **Current release: `v0.1.0`** — a pre-v1 cut. Constitution content (Phases 0–4) is complete; this tag
+> exists so a consuming app can submodule it and run Phase 5 (integration-guide validation) against a
+> real app. Everything below remains the v1.0.0 target.
+
 ## Definition of done for v1
 
 - An agent can land in the repo, read `AGENTS.md`, read `constitution/`, ignore `website/`, and
