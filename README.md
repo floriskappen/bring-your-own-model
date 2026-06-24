@@ -53,3 +53,9 @@ the security rules once. External adopters are a bonus, never a design assumptio
 - **Released:** `v0.1.0` — first pre-v1 cut, cut so a consuming app can submodule it and validate the integration guide (Phase 5). `v1.0.0` remains the target.
 - **First apps:** Bedrijfskompas (company map + agentic CV matching) and e-lezer (e-reader).
 - **What's left to ship v1:** see [`ROADMAP.md`](./ROADMAP.md).
+
+## License
+
+This repository is licensed under the GNU General Public License v3.0 or later
+(GPL-3.0-or-later). See [`LICENSE`](./LICENSE) for the full text. The constitution
+prose in [`constitution/`](./constitution/) is covered by the same license.

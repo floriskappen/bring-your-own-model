@@ -4,7 +4,7 @@
 
 First pre-v1 cut of the BYOM constitution. Released so a consuming app can pin it as a git submodule
 and validate the integration guide (ROADMAP Phase 5) against a real app. Not v1: the integration
-guide has not yet been proven end-to-end, and no `LICENSE` has been added.
+guide has not yet been proven end-to-end.
 
 - Constitution: all seven chapters drafted and given a consistency pass.
   - Philosophy and movement framing.
@@ -15,10 +15,10 @@ guide has not yet been proven end-to-end, and no `LICENSE` has been added.
   - Integration guide and the `BYOM-INTEGRATION.md` pattern for consuming repos.
   - Cost transparency (`06`): live cost from real usage, per-request attribution, local spend history, no lost work.
 - Movement-facing website built (not part of the release artifact).
+- Licensed under GPL-3.0-or-later.
 
 ### Not in v0.1.0 (tracked for v1.0.0)
 
-- No `LICENSE` yet (Phase 6).
 - Integration guide not yet validated against a real consuming app (Phase 5).
 - `v1.0.0` tag not cut.
 

@@ -132,8 +132,8 @@ The integration pattern is the whole reusability bet. v1 isn't done until it's b
 
 ## Phase 6 — Versioning, license & release
 
-- [ ] Add a `LICENSE` (OSS — the repo currently has none). Pick a code license for any site code and
-      consider a content license (e.g. CC-BY) for the constitution prose; state the choice in README.
+- [x] Add a `LICENSE` — GPL-3.0-or-later, applied to the whole repo (code, site, and constitution
+      prose). Stated in README.
 - [ ] Confirm `VERSION` = `v1.0.0` and `CHANGELOG.md` reflects the v1.0.0 scope.
 - [ ] Document the submodule consumption flow in the README/integration guide: how a repo adds the
       submodule, pins the tag, and performs a deliberate version bump.
