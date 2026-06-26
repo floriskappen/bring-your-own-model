@@ -121,13 +121,13 @@ Lightweight static site, built from `website/COPY.md`. Copy is **movement-neutra
 
 The integration pattern is the whole reusability bet. v1 isn't done until it's been run for real once.
 
-- [ ] Author a real `BYOM-INTEGRATION.md` in **Bedrijfskompas** (or e-lezer) by following
+- [x] Author a real `BYOM-INTEGRATION.md` in **Bedrijfskompas** (or e-lezer) by following
       `05-integration-guide.md` literally — list model-powered features, categories, wizard wiring,
       invariant mapping, budget surfacing, pinned version.
-- [ ] Feed every friction point back into `05-integration-guide.md` until the guide produces a correct
+- [x] Feed every friction point back into `05-integration-guide.md` until the guide produces a correct
       doc without improvisation.
 - [x] Ship a `BYOM-INTEGRATION.template.md` (+ worked example) in the constitution to make authoring mechanical (promoted from Optional to required).
-- [ ] Confirm the consuming app actually meets all six invariants — an explicit, auditable check per
+- [x] Confirm the consuming app actually meets all six invariants — an explicit, auditable check per
       invariant (e.g. "key never sent to a first-party endpoint", "CSP present").
 
 ## Phase 6 — Versioning, license & release
