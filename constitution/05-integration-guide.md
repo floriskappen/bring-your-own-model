@@ -89,6 +89,8 @@ Create this file at the root of the consuming repository. A skeleton template an
 10. **The pinned constitution version.** Which released version of this constitution the app is built against (the submodule tag).
 11. **Propagation log.** A record of each constitution-version advance the app has moved through (e.g. `v0.1.0 → v1.0.0`) and what changed in the app at each step. A new entry is appended whenever the pinned submodule version is bumped.
 
+BYOM is model-centric and canonical. A consuming app whose layer predates the constitution under a key-centric name (e.g. "BYOK") may keep that name as an alias, recorded in the doc's intro and deviations — the two refer to the same integration, and no rename is required.
+
 ## The badge
 
 An app may display the BYOM badge (`04-badge-and-registry.md`) only if it meets all six invariants and the principles above. The badge says *follows the pattern and the invariants*; it is not proof of safety. Do not display it if any invariant is unmet or any transparency principle is missing. The concrete badge artifact — SVG files, required `alt` text, and canonical embed snippets — lives at `constitution/badge/README.md`.
