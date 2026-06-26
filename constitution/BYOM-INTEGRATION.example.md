@@ -70,10 +70,10 @@ Data egress (key and prompts go only to the provider): met — no analytics or t
 ## The pinned constitution version
 
 - **Constitution:** BYOM
-- **Pinned version:** `v0.1.0`
+- **Pinned version:** `v1.0.0`
 - **Pinned commit:** `e2fc406678cfc48ec967af511e6761407a4120cc`
 - **Submodule path:** `vendor/byom`
 
 ## Propagation log
 
-- `none -> v0.1.0` (2026-06-24): initial adoption. Submodule added at `vendor/byom`, pinned to tag `v0.1.0`. Authored this `BYOM-INTEGRATION.md` by following `05`; recorded current deviations.
+- `none -> v1.0.0` (2026-06-26): initial adoption. Submodule added at `vendor/byom`, pinned to tag `v1.0.0`. Authored this `BYOM-INTEGRATION.md` from the template (`constitution/BYOM-INTEGRATION.template.md`); recorded current deviations.
