@@ -22,6 +22,8 @@ This is the contract for the connect/onboarding flow — the experience of a use
 
 6. **Tell the truth about safety.** Link to or restate the honest threat model: browser-local is a privacy/control win, not a cryptographic guarantee. Do not imply more safety than exists.
 
+**Acceptance:** before the key input, the onboarding surfaces what connecting does and costs, where to get a key, the provider spend limit, and the honest threat model — in the active locale. Subjective legibility is the spirit; these elements, in that order, are the testable floor.
+
 ## After connecting
 
 The wizard is the first-run instance of a persistent connection surface, not a one-time door. After connecting, the user can always reach a way to: change the model (within the feature's category), adjust the budget, clear or rotate the key, and view local spend history. A model connection is not set-and-forget; the user stays in control of it for as long as it is set.

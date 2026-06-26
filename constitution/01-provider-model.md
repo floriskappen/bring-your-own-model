@@ -10,6 +10,8 @@ Direct-to-provider support (e.g. talking to OpenAI or Anthropic APIs directly) i
 
 An application should **not** hard-code a specific model. It should specify the **model category** a given feature needs, and let the user choose a concrete model that satisfies it. Models are largely interchangeable for a given category, and the set of good options grows over time — pinning to one model ages badly and removes user choice.
 
+The app surfaces suitable options for the user to pick within the category; it does not silently hard-code one. How many options count as "suitable" depends on the app and how it uses models, so this constitution sets no minimum count — that is the app's concern, not BYOM's. The bar is that the user chooses within the category, and that the chooser structurally allows adding a model without a second migration.
+
 Two categories cover most needs:
 
 - **Frontier** — the strongest, most expensive models. Use only where deep world knowledge or hard reasoning genuinely matters.
