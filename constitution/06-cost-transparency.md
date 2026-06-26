@@ -21,3 +21,13 @@ Invariant 6 in `02-security-invariants.md` requires a pre-flight token estimate 
 ## The honest boundary
 
 This chapter is about visibility and control, not a guarantee of perfect accounting. The provider's usage data is the source of truth; the app surfaces it rather than producing it. Where the provider's data is late or coarse, the app says so plainly — pending, or per-request only — rather than papering over the gap with a confident-looking number. State the limits as they are.
+
+## Appendix: Cost surface reference pattern (non-normative)
+
+This is a **recommended shape, not a requirement.** The principles above specify *what* cost data to surface; this appendix describes one app-agnostic lifecycle for *where and how* it is shown, derived from a real integration. It complements principle 1, which is about *when* cost is known. An app may follow this shape, adapt it, or do otherwise — as long as the principles hold.
+
+- **Decoupled from the feature.** The cost surface appears on the first paid request and lives outside the triggering screen, so it survives the feature's own transitions (e.g. a loading state advancing to results) rather than vanishing before the final figure can be read.
+- **Persistent until dismissed.** It never auto-hides mid-run. Dismissal is gated to "all requests settled," so in-flight work cannot be dismissed accidentally.
+- **Burst-grouped.** Sequential calls of one operation (e.g. a multi-pass agentic run) group into a single list via a short grace window; a genuinely new operation starts a fresh list.
+- **Collapsible.** A collapsed pill (amount + pending pulse) ⇄ an expanded panel (per-step breakdown + running total), defaulting expanded on desktop and collapsed on mobile, each toggleable.
+- **Running total always shown,** with its unit, starting at zero. Pending state and per-step attribution map onto principles 1 and 2; history (principle 3) and the leave warning (principle 4) stay on their own surfaces.

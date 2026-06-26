@@ -56,7 +56,7 @@ What the user sees about money. Two things operate together:
 - **the provider spend limit**: the hard cap, set at the provider during onboarding. The app ceiling guards a session; the provider limit caps the account. The onboarding presents both — the app enforces its own ceiling; the provider limit is a recommendation the user acts on elsewhere (the app cannot verify it without calling the provider, which would violate invariant 2). **Acceptance:** the onboarding contains informational copy and a link to set it; no gate is required.
 - **cost transparency** (`06`): real per-request cost surfaced from the provider's usage data, a local spend history, and a warning before leaving during a paid action.
 
-The first two guard spend; the third makes it legible. An app must surface all three.
+The first two guard spend; the third makes it legible. An app must surface all three. For the live-cost *presentation* shape, see the non-normative cost-surface reference pattern in `06`.
 
 ## The six invariants in practice
 
