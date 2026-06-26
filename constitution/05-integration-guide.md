@@ -90,11 +90,11 @@ Create this file at the root of the consuming repository. It records, for that s
 
 ## The badge
 
-An app may display the BYOM badge (`04-badge-and-registry.md`) only if it meets all six invariants and the principles above. The badge says *follows the pattern and the invariants*; it is not proof of safety. Do not display it if any invariant is unmet or any transparency principle is missing.
+An app may display the BYOM badge (`04-badge-and-registry.md`) only if it meets all six invariants and the principles above. The badge says *follows the pattern and the invariants*; it is not proof of safety. Do not display it if any invariant is unmet or any transparency principle is missing. The concrete badge artifact — SVG files, required `alt` text, and canonical embed snippets — lives at `constitution/badge/README.md`.
 
 ## Registry submission
 
-To list an app in the registry, open a PR editing `website/registry/registry.yaml` against the schema. Submission is PR-based and CI-validated; see `website/registry/README.md` for the field reference and process. A listing says the app follows the pattern and has a `BYOM-INTEGRATION.md` — it is not a security audit.
+To list an app in the registry, open a PR editing `constitution/registry/registry.yaml` against the schema. Submission is PR-based and CI-validated; see `constitution/registry/README.md` for the field reference and process. A listing says the app follows the pattern and has a `BYOM-INTEGRATION.md` — it is not a security audit.
 
 ## Conformance checklist
 

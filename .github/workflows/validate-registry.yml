@@ -3,16 +3,16 @@ name: Validate registry
 on:
   pull_request:
     paths:
-      - 'website/registry/registry.yaml'
-      - 'website/registry/registry.schema.json'
-      - 'website/registry/validate_registry.py'
+      - 'constitution/registry/registry.yaml'
+      - 'constitution/registry/registry.schema.json'
+      - 'constitution/registry/validate_registry.py'
       - '.github/workflows/validate-registry.yml'
   push:
     branches: [main]
     paths:
-      - 'website/registry/registry.yaml'
-      - 'website/registry/registry.schema.json'
-      - 'website/registry/validate_registry.py'
+      - 'constitution/registry/registry.yaml'
+      - 'constitution/registry/registry.schema.json'
+      - 'constitution/registry/validate_registry.py'
 
 jobs:
   validate:
@@ -25,4 +25,4 @@ jobs:
       - name: Install validator deps
         run: pip install pyyaml jsonschema
       - name: Validate registry.yaml against schema
-        run: python3 website/registry/validate_registry.py
+        run: python3 constitution/registry/validate_registry.py

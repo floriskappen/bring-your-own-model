@@ -1,10 +1,9 @@
 // Single source of truth for the site origin.
 //
-// The domain is an open decision (see ROADMAP "Cross-cutting / open decisions
-// — Domain"). Until it is chosen, this placeholder stands in everywhere the
-// origin is needed — canonical/OG URLs and the badge embed snippets — so the
-// domain is set in exactly one place when it lands.
-export const SITE = 'https://BYOM-SITE';
+// The constitution site domain is `byom.flkp.nl`. This is the one place the
+// origin lives — canonical/OG URLs and the badge embed snippets all derive
+// from it.
+export const SITE = 'https://byom.flkp.nl';
 
 // The public source repo. Private for now — the constitution footnote links
 // and the registry readme link resolve once it goes public. Defined here so

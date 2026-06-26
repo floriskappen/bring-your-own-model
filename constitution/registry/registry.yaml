@@ -2,8 +2,9 @@
 #
 # Adding an app is a data edit to this file; the website renders from it. The
 # schema (registry.schema.json) is the machine-checked contract — run
-# `python3 validate_registry.py` (or let CI run it) before submitting a PR.
-# See website/registry/README.md for the field reference and submission process.
+# `python3 constitution/registry/validate_registry.py` (or let CI run it)
+# before submitting a PR. See constitution/registry/README.md for the field
+# reference and submission process.
 #
 # The registry is designed to be worth maintaining at N=1. External adopters
 # are a bonus, never a design assumption.

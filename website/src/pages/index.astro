@@ -12,7 +12,7 @@ const here = dirname(fileURLToPath(import.meta.url));
 
 // Registry renders from the data file — adding an app is a data edit.
 const registry = jsyaml.load(
-  readFileSync(join(here, '..', '..', 'registry', 'registry.yaml'), 'utf-8')
+  readFileSync(join(here, '..', '..', '..', 'constitution', 'registry', 'registry.yaml'), 'utf-8')
 );
 const apps = registry.apps;
 
@@ -233,7 +233,7 @@ const htmlEmbed = `<a href="${SITE}/" rel="noopener">
         <p class="note">no apps listed yet. the registry opens as apps adopt the pattern and publish.</p>
       )}
 
-      <p class="note">to add an app, edit <code>registry.yaml</code> and open a pr; ci validates it against the schema. see the <a href={`${REPO}/blob/main/website/registry/README.md`} class="lnk" rel="noopener">registry readme</a>.</p>
+      <p class="note">to add an app, edit <code>registry.yaml</code> and open a pr; ci validates it against the schema. see the <a href={`${REPO}/blob/main/constitution/registry/README.md`} class="lnk" rel="noopener">registry readme</a>.</p>
     </div>
   </section>
 

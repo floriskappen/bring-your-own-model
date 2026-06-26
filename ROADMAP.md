@@ -149,9 +149,8 @@ The integration pattern is the whole reusability bet. v1 isn't done until it's b
   thin index linking into `constitution/`, no normative content.
 - **Hosting:** pick a free static host (GitHub Pages / Cloudflare Pages / Netlify) and wire a build/deploy
   step; ensure the deploy preserves the strict CSP.
-- **Domain:** decide whether v1 gets a custom domain or ships on the host's subdomain.
-- **Badge hosting stability:** the badge URL is a long-lived external contract — choose a path that
-  won't churn across releases.
+- **Domain:** decided — `byom.flkp.nl`. The badge link target and canonical/OG URLs derive from it (see `constitution/badge/README.md`).
+- **Badge hosting stability:** resolved — the served path `/assets/badge/` is stable across releases, and the badge contract moved to `constitution/badge/README.md` (out of `website/`, so implementing agents can read it).
 
 ## Explicitly out of scope for v1 (future)
 

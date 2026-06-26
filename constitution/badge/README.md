@@ -2,7 +2,7 @@
 
 This is the **source of truth** for the BYOM badge artifact. The constitution defines the badge's
 *meaning and claim boundary* at the idea level in
-[`../../constitution/04-badge-and-registry.md`](../../constitution/04-badge-and-registry.md). This file
+[`04-badge-and-registry.md`](../04-badge-and-registry.md). This file
 defines the *concrete artifact*: the files, the link target, the required `alt` text, the canonical
 embed snippets, and the honest claim text that travels with the badge. The website's badge page
 (Phase 4) renders from this file.
@@ -47,10 +47,9 @@ safe under a strict CSP and embeds anywhere.
 The badge links to the **BYOM site root** — the constitution site that explains the pattern, the
 invariants, and the registry. The path is the site root (`/`); it is stable.
 
-> **Host placeholder.** The site domain is not yet chosen (see ROADMAP "Cross-cutting / open
-> decisions — Domain"). The embed snippets below use `https://BYOM-SITE/` as a placeholder. When the
-> domain is decided, replace it everywhere in this file and in any rendered badge page — the paths
-> and filenames do not change.
+> **Domain.** The constitution site is `https://byom.flkp.nl/`. The embed snippets below use it as
+> the link target and the asset origin. The served path (`/assets/badge/…`) and filenames are a
+> long-lived external contract and do not change across releases; the domain is likewise stable.
 
 ## Required `alt` text
 
@@ -68,25 +67,25 @@ pattern and the invariants*; it does **not** guarantee safety.
 Standard (light):
 
 ```markdown
-[![BYOM badge](https://BYOM-SITE/assets/badge/byom-badge-light.svg)](https://BYOM-SITE/)
+[![BYOM badge](https://byom.flkp.nl/assets/badge/byom-badge-light.svg)](https://byom.flkp.nl/)
 ```
 
 Standard (dark):
 
 ```markdown
-[![BYOM badge](https://BYOM-SITE/assets/badge/byom-badge-dark.svg)](https://BYOM-SITE/)
+[![BYOM badge](https://byom.flkp.nl/assets/badge/byom-badge-dark.svg)](https://byom.flkp.nl/)
 ```
 
 Small (light):
 
 ```markdown
-[![BYOM badge](https://BYOM-SITE/assets/badge/byom-badge-light-small.svg)](https://BYOM-SITE/)
+[![BYOM badge](https://byom.flkp.nl/assets/badge/byom-badge-light-small.svg)](https://byom.flkp.nl/)
 ```
 
 Small (dark):
 
 ```markdown
-[![BYOM badge](https://BYOM-SITE/assets/badge/byom-badge-dark-small.svg)](https://BYOM-SITE/)
+[![BYOM badge](https://byom.flkp.nl/assets/badge/byom-badge-dark-small.svg)](https://byom.flkp.nl/)
 ```
 
 > Markdown alt text cannot contain parentheses inside `![...]` without breaking the link syntax. Use
@@ -99,8 +98,8 @@ Small (dark):
 Standard (light):
 
 ```html
-<a href="https://BYOM-SITE/" rel="noopener">
-  <img src="https://BYOM-SITE/assets/badge/byom-badge-light.svg"
+<a href="https://byom.flkp.nl/" rel="noopener">
+  <img src="https://byom.flkp.nl/assets/badge/byom-badge-light.svg"
        alt="BYOM badge — Bring Your Own Model: follows the pattern and security invariants, not proof of safety."
        width="168" height="44" loading="lazy" decoding="async">
 </a>
@@ -109,8 +108,8 @@ Standard (light):
 Standard (dark):
 
 ```html
-<a href="https://BYOM-SITE/" rel="noopener">
-  <img src="https://BYOM-SITE/assets/badge/byom-badge-dark.svg"
+<a href="https://byom.flkp.nl/" rel="noopener">
+  <img src="https://byom.flkp.nl/assets/badge/byom-badge-dark.svg"
        alt="BYOM badge — Bring Your Own Model: follows the pattern and security invariants, not proof of safety."
        width="168" height="44" loading="lazy" decoding="async">
 </a>
@@ -119,8 +118,8 @@ Standard (dark):
 Small (light):
 
 ```html
-<a href="https://BYOM-SITE/" rel="noopener">
-  <img src="https://BYOM-SITE/assets/badge/byom-badge-light-small.svg"
+<a href="https://byom.flkp.nl/" rel="noopener">
+  <img src="https://byom.flkp.nl/assets/badge/byom-badge-light-small.svg"
        alt="BYOM badge — Bring Your Own Model: follows the pattern and security invariants, not proof of safety."
        width="96" height="26" loading="lazy" decoding="async">
 </a>
@@ -129,8 +128,8 @@ Small (light):
 Small (dark):
 
 ```html
-<a href="https://BYOM-SITE/" rel="noopener">
-  <img src="https://BYOM-SITE/assets/badge/byom-badge-dark-small.svg"
+<a href="https://byom.flkp.nl/" rel="noopener">
+  <img src="https://byom.flkp.nl/assets/badge/byom-badge-dark-small.svg"
        alt="BYOM badge — Bring Your Own Model: follows the pattern and security invariants, not proof of safety."
        width="96" height="26" loading="lazy" decoding="async">
 </a>

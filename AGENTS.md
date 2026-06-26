@@ -20,9 +20,11 @@ Read everything under [`constitution/`](./constitution/), in order:
 6. [`05-integration-guide.md`](./constitution/05-integration-guide.md) — how to author this app's own `BYOM-INTEGRATION.md`
 7. [`06-cost-transparency.md`](./constitution/06-cost-transparency.md) — spend visibility: real cost, local history, no lost work
 
+The concrete badge artifact and embed contract live at [`constitution/badge/README.md`](./constitution/badge/README.md), and the registry schema and submission process at [`constitution/registry/README.md`](./constitution/registry/README.md). Both are referenced by `04` and `05`.
+
 ## What to ignore
 
-**Ignore [`website/`](./website/) entirely.** It is the public, movement-facing site (philosophy, registry, security page) for human readers discovering BYOM. It is not relevant to implementing BYOM in an application. Do not read it, do not base implementation decisions on it.
+**Ignore [`website/`](./website/) entirely.** It is the public, movement-facing site (philosophy and security pages) for human readers discovering BYOM. It is not relevant to implementing BYOM in an application. Do not read it, do not base implementation decisions on it.
 
 ## What to produce in the consuming repository
 

@@ -13,8 +13,8 @@ This directory holds three things:
 | `validate_registry.py` | A validator that checks `registry.yaml` against the schema using PyYAML + jsonschema. Runs locally and in CI. |
 
 The constitution defines the badge's meaning and claim boundary at
-[`../../constitution/04-badge-and-registry.md`](../../constitution/04-badge-and-registry.md). This
-directory defines the concrete registry artifact.
+[`04-badge-and-registry.md`](../04-badge-and-registry.md). This directory
+defines the concrete registry artifact.
 
 ## Field reference
 
@@ -59,7 +59,7 @@ Submissions are **PR-based**. To add or update an app:
 
    ```sh
    pip install pyyaml jsonschema
-   python3 website/registry/validate_registry.py
+   python3 constitution/registry/validate_registry.py
    ```
 
    The validator uses [PyYAML](https://pyyaml.org/) and
