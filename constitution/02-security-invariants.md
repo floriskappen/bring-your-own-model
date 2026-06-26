@@ -39,3 +39,9 @@ Do not overstate the guarantee anywhere in an app's UI or docs. State plainly th
 The budget ceiling in invariant 6 is enforced on pre-flight estimates, and estimates can be wrong — especially under concurrent or multi-step agentic requests, even with the cumulative, in-flight-aware check. It is a best-effort guard against runaway spend, not a billing guarantee that spend can never exceed the ceiling.
 
 The hard cap is the spend limit the user sets at the provider during onboarding. The app ceiling and the provider limit are two layers: the app guards within a session; the provider caps the account. The onboarding flow **presents both** — the app's own ceiling (which it enforces) and the provider-side spend limit (a recommendation the user acts on elsewhere). The app cannot verify the provider limit is set without calling the provider, which would violate invariant 2, so its obligation is to present it, not enforce it. **Acceptance:** the onboarding contains informational copy and a link to set the provider spend limit; no acknowledgment gate is required. Do not imply the app ceiling alone can stop all overrun.
+
+## Estimation and pricing
+
+The pre-flight estimate in invariant 6 is a guard, not a displayed cost. For apps that do not ship a tokenizer, a character-ratio heuristic is the blessed default — input tokens ≈ `ceil(message characters / 4)`, output tokens ≈ the request's `maxTokens` (or a conservative default). It is best-effort and guard-only; a consumer may override it with a real tokenizer or a better heuristic without violating invariant 4.
+
+Converting tokens to the provider's billing unit (e.g. USD) needs a model's per-token price. When a model's pricing is unknown or null, the app uses a conservative fallback rate for the guard only — never for displayed cost, which always comes from the provider's real usage (`06`). The fallback is sized to over-estimate, so the guard never under-blocks.

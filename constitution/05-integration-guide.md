@@ -75,7 +75,7 @@ The minimum an app must surface is defined in `06-cost-transparency.md`: real pe
 
 ## Authoring `BYOM-INTEGRATION.md`
 
-Create this file at the root of the consuming repository. It records, for that specific app:
+Create this file at the root of the consuming repository. A skeleton template and a worked example ship at `constitution/BYOM-INTEGRATION.template.md` and `constitution/BYOM-INTEGRATION.example.md` — copy the template and fill it in. It records, for that specific app:
 
 1. **App name and one-line description.** What the app is, in a sentence.
 2. **The free core.** Which features work with no model connected (if any). An app can be entirely model-dependent; what is required is that features which don't need inference are not gated behind a key.
@@ -87,6 +87,7 @@ Create this file at the root of the consuming repository. It records, for that s
 8. **How each security invariant is met.** Point to where in the app each invariant from `02` is implemented.
 9. **Deviations from the constitution, and why.** Any place the app departs from the constitution, with the reason. The constitution is the default; deviations are called out, not hidden. The deviations section is the set of unchecked conformance-checklist boxes (below), each with its reason — so the two cannot drift apart, and a reader can reconstruct the checklist state from the deviations list alone.
 10. **The pinned constitution version.** Which released version of this constitution the app is built against (the submodule tag).
+11. **Propagation log.** A record of each constitution-version advance the app has moved through (e.g. `v0.1.0 → v1.0.0`) and what changed in the app at each step. A new entry is appended whenever the pinned submodule version is bumped.
 
 ## The badge
 

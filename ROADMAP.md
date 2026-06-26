@@ -126,7 +126,7 @@ The integration pattern is the whole reusability bet. v1 isn't done until it's b
       invariant mapping, budget surfacing, pinned version.
 - [ ] Feed every friction point back into `05-integration-guide.md` until the guide produces a correct
       doc without improvisation.
-- [ ] Optional: ship a `BYOM-INTEGRATION.template.md` in the constitution to make authoring mechanical.
+- [x] Ship a `BYOM-INTEGRATION.template.md` (+ worked example) in the constitution to make authoring mechanical (promoted from Optional to required).
 - [ ] Confirm the consuming app actually meets all six invariants — an explicit, auditable check per
       invariant (e.g. "key never sent to a first-party endpoint", "CSP present").
 
