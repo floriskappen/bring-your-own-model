@@ -28,7 +28,8 @@ const stripMd = (s) => s.replace(/\*\*/g, '').trim();
 const invariants = [...section.matchAll(/^(\d+)\.\s+\*\*(.+?)\*\*\s*(.*)$/gm)].map((m) => ({
   n: m[1],
   name: stripMd(m[2]).replace(/\.$/, '').toLowerCase(),
-  body: stripMd(m[3]).toLowerCase(),
+  // strip the inline "**Acceptance:**" scenario (implementation-authority; not movement-facing)
+  body: stripMd(m[3]).toLowerCase().split('acceptance:')[0].trim(),
 }));
 if (invariants.length !== 6) {
   throw new Error(`expected 6 invariants from the constitution, got ${invariants.length}.`);

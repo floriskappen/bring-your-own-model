@@ -1,0 +1,16 @@
+# Netlify deploy config for the BYOM movement-facing site (website/).
+# The constitution/ tree is the release artifact; only website/ is deployed.
+
+[build]
+  base = "website"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Security headers (including the strict CSP) are NOT duplicated here. They are
+# generated at build time into public/_headers by scripts/gen-headers.mjs (from
+# the single source src/csp.mjs), and Astro copies public/ to dist/. Netlify
+# reads dist/_headers natively, so the CSP/security-header set is delivered as
+# real HTTP headers — with no second source of truth to drift.
