@@ -33,7 +33,7 @@ defines the concrete registry artifact.
 | `url` | yes | string | Live app URL. Must be `https://`. |
 | `description` | yes | string | One-line, plain description. No hype. Max 160 chars. |
 | `pinned_constitution_version` | yes | string | Released constitution tag the app is built against (`vX.Y.Z`) — the submodule pin. |
-| `integration_doc_url` | yes | string | Link to the app's `BYOM-INTEGRATION.md` (rendered or raw). Per `05-integration-guide.md`, every BYOM app authors this doc at its repo root. Must be `https://`. |
+| `integration_doc_url` | yes | string | Link to the app's `BYOM-INTEGRATION.md` (rendered or raw). Per `05-integration-guide.md`, every BYOM app authors this doc — conventionally at `docs/BYOM-INTEGRATION.md` (repo root also acceptable). Must be `https://`. |
 | `source_url` | yes | string | Repo or source link. Must be `https://`. |
 | `model_powered_features` | yes | array | The model-powered features. Non-empty: a BYOM app has at least one model-powered feature. |
 | `badge_variant` | no | enum | Which badge variant the app displays: `light` \| `dark` \| `light-small` \| `dark-small`. Defaults to `light` (standard). |

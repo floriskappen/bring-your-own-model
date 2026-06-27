@@ -28,7 +28,7 @@ The concrete badge artifact and embed contract live at [`constitution/badge/READ
 
 ## What to produce in the consuming repository
 
-When you implement BYOM in an application, create a **`BYOM-INTEGRATION.md`** at that repository's root. It describes how BYOM is implemented *for that specific app* — which features are model-powered, which model category each needs, how the connect wizard is wired in, how budget limits surface in that UI. See [`05-integration-guide.md`](./constitution/05-integration-guide.md) for how to author it; a skeleton template and worked example ship at [`constitution/BYOM-INTEGRATION.template.md`](./constitution/BYOM-INTEGRATION.template.md).
+When you implement BYOM in an application, create a **`BYOM-INTEGRATION.md`** (conventionally at `docs/BYOM-INTEGRATION.md`; the repo root is also acceptable). It describes how BYOM is implemented *for that specific app* — which features are model-powered, which model category each needs, how the connect wizard is wired in, how budget limits surface in that UI. See [`05-integration-guide.md`](./constitution/05-integration-guide.md) for how to author it; a skeleton template and worked example ship at [`constitution/BYOM-INTEGRATION.template.md`](./constitution/BYOM-INTEGRATION.template.md).
 
 The constitution stays idea-level and stack-agnostic. The technical implementation — frameworks, libraries, exact code — belongs in the consuming application and its `BYOM-INTEGRATION.md`, never in this repository.
 

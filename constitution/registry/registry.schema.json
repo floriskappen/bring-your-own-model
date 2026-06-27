@@ -59,7 +59,7 @@
           "type": "string",
           "format": "uri",
           "pattern": "^https://",
-          "description": "Link to the app's BYOM-INTEGRATION.md (rendered or raw). Per 05-integration-guide.md, every BYOM app authors this doc at its repo root."
+          "description": "Link to the app's BYOM-INTEGRATION.md (rendered or raw). Per 05-integration-guide.md, every BYOM app authors this doc — conventionally at docs/BYOM-INTEGRATION.md (repo root also acceptable)."
         },
         "source_url": {
           "type": "string",

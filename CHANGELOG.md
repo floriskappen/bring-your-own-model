@@ -1,5 +1,23 @@
 # Changelog
 
+## v1.1.0
+
+Integration-doc placement convention. No normative invariant or contract change — a placement
+clarification so the consuming app's `BYOM-INTEGRATION.md` is less of a root-eyesore. The registry's
+`integration_doc_url` field was already location-agnostic; discovery rides on `AGENTS.md` pointing at
+the doc either way.
+
+### Constitution
+
+- **Integration-doc placement.** `BYOM-INTEGRATION.md` is now conventionally authored at
+  `docs/BYOM-INTEGRATION.md` in the consuming repo; the repo root remains an acceptable alternative.
+  Updated `05-integration-guide.md` (prose and conformance checklist), `AGENTS.md`, and `README.md`.
+
+### Registry
+
+- Field descriptions in `registry.schema.json` and `registry/README.md` updated to match. No required
+  fields or validation rules changed; the registry entry `schema_version` stays `v1.0.0`.
+
 ## v0.1.0
 
 First pre-v1 cut of the BYOM constitution. Released so a consuming app can pin it as a git submodule
