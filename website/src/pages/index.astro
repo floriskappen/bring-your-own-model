@@ -1,0 +1,264 @@
+---
+import Base from '../layouts/Base.astro';
+import Fireflies from '../components/Fireflies.astro';
+import Grid from '../components/Grid.astro';
+import { SITE, REPO } from '../site.mjs';
+import jsyaml from 'js-yaml';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+
+const here = dirname(fileURLToPath(import.meta.url));
+
+// Registry renders from the data file — adding an app is a data edit.
+const registry = jsyaml.load(
+  readFileSync(join(here, '..', '..', 'registry', 'registry.yaml'), 'utf-8')
+);
+const apps = registry.apps;
+
+// The six invariants come straight out of the released constitution at build
+// time, so the page can never drift from the normative source. The
+// constitution states them in sentence case; the site voice is lowercase.
+const md = readFileSync(
+  join(here, '..', '..', '..', 'constitution', '02-security-invariants.md'),
+  'utf-8'
+);
+const section = md.split('## The invariants')[1]?.split('## ')[0] ?? '';
+const stripMd = (s) => s.replace(/\*\*/g, '').trim();
+const invariants = [...section.matchAll(/^(\d+)\.\s+\*\*(.+?)\*\*\s*(.*)$/gm)].map((m) => ({
+  n: m[1],
+  name: stripMd(m[2]).replace(/\.$/, '').toLowerCase(),
+  body: stripMd(m[3]).toLowerCase(),
+}));
+if (invariants.length !== 6) {
+  throw new Error(`expected 6 invariants from the constitution, got ${invariants.length}.`);
+}
+
+// Badge embed — show the standard light/dark; the full asset set and the
+// small variants live under /assets/badge/.
+const badgeAlt = 'BYOM badge — follows the pattern and security invariants, not proof of safety.';
+const mdEmbed = `[![BYOM](${SITE}/assets/badge/byom-badge-light.svg)](${SITE}/)`;
+const htmlEmbed = `<a href="${SITE}/" rel="noopener">
+  <img src="${SITE}/assets/badge/byom-badge-light.svg"
+       alt="${badgeAlt}" width="168" height="44" loading="lazy">
+</a>`;
+---
+
+<Base title="" path="/">
+  <section class="hero">
+    <div class="hero-head">
+      <Grid />
+      <Fireflies text="bring your own model" />
+      <p class="hero-lead">
+        free software for the llm era. the <strong>app is free</strong>; the user
+        <strong>brings their own model</strong> for the parts that need it, and pays
+        only for the inference they personally use.
+      </p>
+    </div>
+
+    <dl class="deal">
+      <div class="deal-row">
+        <dt class="deal-key">the app</dt>
+        <dd class="deal-val">free to use, free to host. no backend.</dd>
+      </div>
+      <div class="deal-row">
+        <dt class="deal-key">the model</dt>
+        <dd class="deal-val">the user brings their own key.</dd>
+      </div>
+      <div class="deal-row">
+        <dt class="deal-key">the bill</dt>
+        <dd class="deal-val">paid straight to the provider, no markup.</dd>
+      </div>
+      <div class="deal-row">
+        <dt class="deal-key">the developer</dt>
+        <dd class="deal-val">never touches the key or the money.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="band" id="what">
+    <div class="band-head"><h2>what it is</h2></div>
+    <div class="band-content prose">
+      <p class="lead-p">a pattern for building apps with llm or agent features at their core, without charging anyone a subscription.</p>
+      <p>the app works on its own: browse, read, navigate, use the whole thing for free. some features are powered by a model. when a user wants those, they connect their own key, and the inference runs on their own model access, billed directly by their provider.</p>
+      <p>the app stays free, and nobody pays for anyone else's inference.</p>
+    </div>
+  </section>
+
+  <section class="band" id="why">
+    <div class="band-head"><h2>why it exists</h2></div>
+    <div class="band-content prose">
+      <p>when an app's features run on inference the developer pays for, the app can't really be free. the cost has to come back somehow — a subscription, metering, a payment stack — and the developer ends up reselling intelligence they never set out to resell.</p>
+      <p>byom removes that. the user already has, or can get, model access. they bring it. no middleman, no markup, no billing business growing out of a side project.</p>
+    </div>
+  </section>
+
+  <section class="band" id="idea">
+    <div class="band-head"><h2>the bigger idea</h2></div>
+    <div class="band-content prose">
+      <p>building software with coding agents is fast and widely accessible now. that makes it easy to build small, useful tools that solve real problems — and a lot of that software is better with model inference.</p>
+      <p>those tools don't have to become subscription products to exist. they can be free software, with each user carrying their own inference cost through their own model access. one person solves their problem, shares it, and anyone with the same problem benefits — at no cost to the builder.</p>
+    </div>
+  </section>
+
+  <section class="band" id="how">
+    <div class="band-head"><h2>how it works<a class="ref" href="#fn-1" id="ref-1" aria-label="see reference 1">1</a></h2><span class="band-note">v1: openrouter</span></div>
+    <div class="band-content">
+      <figure class="flow">
+        <div class="flow-path">
+          <span class="node">user's browser</span>
+          <span class="arrow">→</span>
+          <span class="node is-key">their own key</span>
+          <span class="arrow">→</span>
+          <span class="node">the provider</span>
+          <span class="arrow">→</span>
+          <span class="node">the model</span>
+        </div>
+        <p class="flow-off">there is no developer server on this line — the key and the money go straight from the user to their provider.</p>
+      </figure>
+
+      <ul class="spec">
+        <li><strong>free to host.</strong> static front-end code, no developer-run backend.</li>
+        <li><strong>bring a key.</strong> model-powered features ask the user to connect one.</li>
+        <li><strong>browser-local.</strong> the key stays in the browser and calls the provider directly. it never reaches the developer.</li>
+        <li><strong>pick a category.</strong> apps request a model category — frontier or worker — and let the user choose.</li>
+        <li><strong>set a ceiling.</strong> a user-set budget limit keeps inference from running away.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band" id="security">
+    <div class="band-head"><h2>security<a class="ref" href="#fn-2" id="ref-2" aria-label="see reference 2">2</a></h2></div>
+    <div class="band-content">
+      <div class="prose">
+        <p class="lead-p">keeping the key in the browser is a privacy and control win, not a cryptographic guarantee.</p>
+        <p>a key in browser storage can be read by any cross-site-scripting flaw on the page, so byom apps follow six invariants to reduce that surface. they are mandatory for any app claiming compliance or showing the badge.</p>
+      </div>
+
+      <ol class="inv">
+        {invariants.map((inv) => (
+          <li>
+            <span class="inv-n">{inv.n}</span>
+            <span class="inv-text"><strong>{inv.name}.</strong> {inv.body}</span>
+          </li>
+        ))}
+      </ol>
+
+      <p class="note">a badge means an app follows the pattern and these invariants. it is not proof of safety: in-page ui can always be cloned by a malicious site. stronger phishing resistance would need privileged browser chrome — a future direction, not part of v1.</p>
+    </div>
+  </section>
+
+  <section class="band" id="money">
+    <div class="band-head"><h2>the money<a class="ref" href="#fn-3" id="ref-3" aria-label="see reference 3">3</a></h2></div>
+    <div class="band-content">
+      <div class="prose">
+        <p class="lead-p">you can see what you spend, as you spend it.</p>
+      </div>
+      <ul class="spec">
+        <li><strong>live cost.</strong> model-powered actions show their real cost as they run — actual usage, never an estimate.</li>
+        <li><strong>breakdown.</strong> spend is attributable per request, and where the app can, per feature.</li>
+        <li><strong>history.</strong> a local record of what you've spent, kept on your device next to your key setup. the developer never sees it.</li>
+        <li><strong>no lost work.</strong> if a paid action is in progress, the app warns before you leave, so you don't pay for work that gets thrown away.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band" id="key">
+    <div class="band-head"><h2>getting a key<a class="ref" href="#fn-4" id="ref-4" aria-label="see reference 4">4</a></h2></div>
+    <div class="band-content">
+      <div class="prose">
+        <p class="lead-p">byom assumes you can bring model access, not that you already have it.</p>
+        <p>an app built on byom should walk a first-time user through it: what a key is, getting one from a provider (openrouter in v1), setting a spend limit there, and connecting it.</p>
+      </div>
+      <p class="note">if that path isn't clear to someone who's never seen an api key, the app isn't done.</p>
+    </div>
+  </section>
+
+  <section class="band" id="practice">
+    <div class="band-head"><h2>in practice</h2></div>
+    <div class="band-content">
+      <div class="prose">
+        <p class="lead-p">a worked example, end to end:</p>
+      </div>
+      <ol class="inv">
+        <li><span class="inv-n">1</span><span class="inv-text">you open the app and use it. browsing, reading, navigating — free.</span></li>
+        <li><span class="inv-n">2</span><span class="inv-text">a feature needs a model. the app asks you to connect a key, and shows you how to get one if you don't have it.</span></li>
+        <li><span class="inv-n">3</span><span class="inv-text">you set a budget. the app guards against runaway spend; set a hard limit at your provider too.</span></li>
+        <li><span class="inv-n">4</span><span class="inv-text">the feature runs. you see the cost as it works, recorded locally.</span></li>
+      </ol>
+      <p class="note">more examples are coming as apps adopt the pattern. the registry lists the ones that exist today.</p>
+    </div>
+  </section>
+
+  <section class="band" id="badge">
+    <div class="band-head"><h2>the badge<a class="ref" href="#fn-5" id="ref-5" aria-label="see reference 5">5</a></h2></div>
+    <div class="band-content">
+      <div class="prose">
+        <p>an embeddable mark: a plug connecting into a two-slot socket. apps that follow the pattern can show it. light, dark, and small variants live under <code>/assets/badge/</code>.</p>
+      </div>
+
+      <div class="badge-row">
+        <img src="/assets/badge/byom-badge-light.svg" alt={badgeAlt} width="168" height="44" loading="lazy" />
+        <img src="/assets/badge/byom-badge-dark.svg" alt={badgeAlt} width="168" height="44" loading="lazy" />
+      </div>
+
+      <p class="snippet-label">markdown</p>
+      <pre class="embed-snippet">{mdEmbed}</pre>
+      <p class="snippet-label">html</p>
+      <pre class="embed-snippet">{htmlEmbed}</pre>
+    </div>
+  </section>
+
+  <section class="band" id="registry">
+    <div class="band-head"><h2>registry</h2><span class="band-note">{apps.length} app{apps.length !== 1 ? 's' : ''}</span></div>
+    <div class="band-content">
+      <div class="prose">
+        <p>apps that use this convention. a listing says an app follows the pattern and has a <code>BYOM-INTEGRATION.md</code> — it is not a security audit.</p>
+      </div>
+
+      {apps.length > 0 ? (
+        <ul class="app-list">
+          {apps.map((app) => (
+            <li>
+              <a href={app.url} class="app-name lnk" rel="noopener">{app.name}</a>
+              <span class="app-desc">{app.description}</span>
+              <span class="app-links">
+                <a href={app.source_url} class="lnk" rel="noopener">source</a>
+                <a href={app.integration_doc_url} class="lnk" rel="noopener">integration</a>
+              </span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="note">no apps listed yet. the registry opens as apps adopt the pattern and publish.</p>
+      )}
+
+      <p class="note">to add an app, edit <code>registry.yaml</code> and open a pr; ci validates it against the schema. see the <a href={`${REPO}/blob/main/website/registry/README.md`} class="lnk" rel="noopener">registry readme</a>.</p>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg class="seed" viewBox="0 0 42 42">
+      <circle cx="21" cy="21" r="2.5" />
+      <circle cx="14" cy="16" r="2" />
+      <circle cx="28" cy="16" r="2" />
+      <circle cx="16" cy="28" r="2" />
+      <circle cx="26" cy="28" r="2" />
+      <circle cx="21" cy="12" r="1.5" />
+      <circle cx="21" cy="30" r="1.5" />
+      <circle cx="12" cy="22" r="1.5" />
+      <circle cx="30" cy="22" r="1.5" />
+    </svg>
+  </div>
+
+  <section class="footnotes" aria-label="references">
+    <ol>
+      <li id="fn-1"><a href="#ref-1" class="ref-back" aria-label="back to reference 1">↩</a> the provider model, categories, and the call path. <a href={`${REPO}/blob/main/constitution/01-provider-model.md`} class="lnk" rel="noopener">01-provider-model.md</a></li>
+      <li id="fn-2"><a href="#ref-2" class="ref-back" aria-label="back to reference 2">↩</a> the six security invariants. <a href={`${REPO}/blob/main/constitution/02-security-invariants.md`} class="lnk" rel="noopener">02-security-invariants.md</a></li>
+      <li id="fn-3"><a href="#ref-3" class="ref-back" aria-label="back to reference 3">↩</a> cost transparency. <a href={`${REPO}/blob/main/constitution/06-cost-transparency.md`} class="lnk" rel="noopener">06-cost-transparency.md</a></li>
+      <li id="fn-4"><a href="#ref-4" class="ref-back" aria-label="back to reference 4">↩</a> the wizard and onboarding contract. <a href={`${REPO}/blob/main/constitution/03-wizard-ux-contract.md`} class="lnk" rel="noopener">03-wizard-ux-contract.md</a></li>
+      <li id="fn-5"><a href="#ref-5" class="ref-back" aria-label="back to reference 5">↩</a> the badge and registry. <a href={`${REPO}/blob/main/constitution/04-badge-and-registry.md`} class="lnk" rel="noopener">04-badge-and-registry.md</a></li>
+    </ol>
+    <p class="footnotes-all"><a href={`${REPO}/tree/main/constitution`} class="lnk" rel="noopener">read the full constitution →</a></p>
+  </section>
+</Base>

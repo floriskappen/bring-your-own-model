@@ -1,0 +1,19 @@
+{
+  "name": "byom-website",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "raster": "node scripts/raster-assets.mjs",
+    "prebuild": "node scripts/raster-assets.mjs && node scripts/gen-headers.mjs",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "astro": "^5.0.0",
+    "js-yaml": "^4.1.0",
+    "sharp": "^0.34.5"
+  }
+}

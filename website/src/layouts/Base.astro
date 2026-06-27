@@ -1,0 +1,60 @@
+---
+import '../styles/global.css';
+import Atmosphere from '../components/Atmosphere.astro';
+import { SITE } from '../site.mjs';
+import { CSP } from '../csp.mjs';
+
+interface Props {
+  title: string;
+  description?: string;
+  path?: string;
+}
+
+const { title, description = 'Free software for the LLM era. The app is free; you bring the model for the parts that need it.', path = '' } = Astro.props;
+
+const siteName = 'bring your own model';
+const fullTitle = path ? `${title} — ${siteName}` : `${siteName}`;
+// Rasterized PNG (built by scripts/raster-assets.mjs) — several social
+// platforms and chat unfurlers do not render SVG Open Graph images.
+const ogImage = `${SITE}/assets/og-image.png`;
+const canonical = `${SITE}${path}`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{fullTitle}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href={canonical}>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content={fullTitle}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={ogImage}>
+  <meta property="og:url" content={canonical}>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content={ogImage}>
+  <!-- Fallback CSP for environments that don't apply public/_headers. Both
+       come from the single source src/csp.mjs (public/_headers is generated
+       from it at build time), so they can't drift. -->
+  <meta http-equiv="Content-Security-Policy" content={CSP}>
+</head>
+<body>
+  <Atmosphere />
+
+  <div class="sheet">
+    <main>
+      <slot />
+    </main>
+
+    <footer class="colophon">
+      <span class="colophon-mark" aria-hidden="true">●—◗</span>
+      <span>open source. no monetization. build it because it should exist; share it; let anyone who has the same problem use it for free.</span>
+    </footer>
+  </div>
+</body>
+</html>

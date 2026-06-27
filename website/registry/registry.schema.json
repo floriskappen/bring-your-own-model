@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://byom.local/registry.schema.json",
+  "title": "BYOM app registry",
+  "description": "Schema for the BYOM app registry. Adding an app is a data edit to registry.yaml; this schema is the machine-checked contract. See website/registry/README.md for field reference and the submission process.",
+  "type": "object",
+  "required": ["schema_version", "apps"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Semver version of the registry entry schema itself, so the format can evolve. Bumped when required fields or validation rules change.",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "apps": {
+      "type": "array",
+      "minItems": 0,
+      "description": "List of participating BYOM apps. May be empty before any app is published; designed to be worth maintaining at N=1 once apps exist.",
+      "items": { "$ref": "#/$defs/app" }
+    }
+  },
+  "$defs": {
+    "app": {
+      "type": "object",
+      "required": [
+        "name",
+        "url",
+        "description",
+        "pinned_constitution_version",
+        "integration_doc_url",
+        "source_url",
+        "model_powered_features"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "App display name."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "description": "Live app URL. Must be https."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160,
+          "description": "One-line, plain description. No hype, no marketing voice. Max 160 chars so it fits a list row."
+        },
+        "pinned_constitution_version": {
+          "type": "string",
+          "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "description": "The released constitution tag the app is built against (the submodule pin). Must be a semver tag."
+        },
+        "integration_doc_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "description": "Link to the app's BYOM-INTEGRATION.md (rendered or raw). Per 05-integration-guide.md, every BYOM app authors this doc at its repo root."
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "description": "Repo or source link for the app."
+        },
+        "model_powered_features": {
+          "type": "array",
+          "minItems": 1,
+          "description": "The model-powered features. Non-empty: a BYOM app has at least one model-powered feature.",
+          "items": { "$ref": "#/$defs/feature" }
+        },
+        "badge_variant": {
+          "type": "string",
+          "enum": ["light", "dark", "light-small", "dark-small"],
+          "description": "Optional. Which badge variant the app displays. Defaults to 'light' (standard)."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional free-text notes (e.g. launch status, platform caveats). Keep brief."
+        }
+      }
+    },
+    "feature": {
+      "type": "object",
+      "required": ["name", "description", "category"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Feature name as shown in the app."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240,
+          "description": "One-line description of what the feature does and why it needs a model."
+        },
+        "category": {
+          "type": "string",
+          "enum": ["frontier", "worker"],
+          "description": "Model category the feature needs, per 01-provider-model.md. Default to worker unless frontier is genuinely required."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+name: Validate registry
+
+on:
+  pull_request:
+    paths:
+      - 'website/registry/registry.yaml'
+      - 'website/registry/registry.schema.json'
+      - 'website/registry/validate_registry.py'
+      - '.github/workflows/validate-registry.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'website/registry/registry.yaml'
+      - 'website/registry/registry.schema.json'
+      - 'website/registry/validate_registry.py'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Install validator deps
+        run: pip install pyyaml jsonschema
+      - name: Validate registry.yaml against schema
+        run: python3 website/registry/validate_registry.py
