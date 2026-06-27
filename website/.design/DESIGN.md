@@ -49,6 +49,7 @@
 - `.app-list` — the registry: a plain hairline-ruled list of apps that use the convention (name · description · source/integration links). Not cards — a registry entry is a fact, not a product.
 - `.inv` — the six security invariants as a numbered hairline list; mono numeral as the only mark.
 - `.embed-snippet` — code blocks for copy-paste embeds; monospace (JetBrains Mono), ink background, hairline border.
+- **brand mark** — the byom logo is two overlapping squares (the app in ink, the model you bring in accent) that deepen where they overlap, applying the system's ink-and-pigment "multiply" material as a mark. Square corners, two-tone slate, lockup in Archivo. One canonical definition in `scripts/gen-brand.mjs` emits every variant (favicon, standard/small badges in light/dark, a bare minimal mark, OG image) so they cannot drift; it runs first in `prebuild`, ahead of the rasterizer. Replaces the earlier plug→socket glyph and the footer's stray `●—◗` text mark.
 
 ## Site shape
 
@@ -58,4 +59,5 @@ One page. The constitution-facing detail (security architecture, full badge asse
 
 - 2026-06-21 initial adoption: v0.1.0 — wired tokens.css, fonts, base/type/components/atmosphere/material styles into Astro layout. Slate theme override applied; fireflies effect ported to masthead title.
 - 2026-06-22 voice + shape correction: removed the uppercase tracked eyebrow/label tic across the site to honour the lowercase voice (`type.md`); collapsed the four pages into a single homepage; replaced the registry product-cards with a plain list. Copy plainer, fewer flourishes.
+- 2026-06-27 brand redesign: replaced the plug→socket glyph with the overlapping-squares mark (app + your model, deepening on overlap — the system's ink+pigment material as a logo). Square corners, hairline-bordered badges (dropped the app-store underline bar). Added a bare minimal mark for tight UI spaces. Unified the footer (was a stray `●—◗` text mark) onto the real mark. All nine brand SVGs now generate from one definition (`scripts/gen-brand.mjs`, wired into `prebuild` before the rasterizer); constitution badge glyph description + inventory updated to match.
 - 2026-06-22 atmosphere scoping: dropped the nav (single page). Firefly motes moved from the full-page atmosphere into the masthead, revealed through a radial mask centred on the title so they cluster around the header and fade out. The breathing grid is masked out behind the centred content column and fades in over a 140px band toward the page edges; grain + bloom remain full-bleed. Footer spans the full content width.

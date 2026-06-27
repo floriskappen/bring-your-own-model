@@ -604,10 +604,10 @@ a:focus-visible, button:focus-visible {
 }
 .colophon span:last-child { max-width: var(--measure); }
 .colophon-mark {
-  font-family: var(--font-mono);
-  color: var(--color-accent-base);
   flex: none;
-  letter-spacing: -0.1em;
+  width: 1.15em;
+  height: 1.15em;
+  align-self: center;
 }
 
 /* ── reduced motion ─────────────────────────────────────────────────── */

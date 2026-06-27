@@ -9,11 +9,13 @@ embed snippets, and the honest claim text that travels with the badge. The websi
 
 ## The glyph
 
-A **plug connecting into an outlet**: a corded plug on the left, two prongs, and a two-slot socket on
-the right, with a small gap that reads as the moment of connection. It says "bring and connect your
-own" — deliberately not a robot (reads as "agent," the wrong meaning) and not a key-as-chore (too
-literal and joyless), per the constitution's icon direction. Monochrome, legible at 16px, and drawn
-in the slate palette of the site's design system.
+**Two overlapping squares**: the app (ink) and the model you bring (accent), with the overlap painted
+a deepened tone — colour darkening where two pigments stack, the design system's ink-and-pigment
+material. It says "bring your own model" as two things combining — deliberately not a robot (reads as
+"agent," the wrong meaning) and not a key-as-chore (too literal and joyless), per the constitution's
+icon direction. Two-tone slate, square-cornered, legible down to 16px. Every badge, the favicon, the
+bare mark, and the OG image are generated from this one mark by `website/scripts/gen-brand.mjs`, so
+the variants cannot drift apart.
 
 ## File inventory
 
@@ -24,20 +26,54 @@ site root, so they are **served** at `/assets/…`. Badge assets live under the 
 
 | File (repo path under `website/public/assets/`) | Purpose | Size | Origin |
 | --- | --- | --- | --- |
-| `badge/byom-badge-light.svg` | Standard badge, light | 168 × 44 | source |
-| `badge/byom-badge-dark.svg` | Standard badge, dark | 168 × 44 | source |
-| `badge/byom-badge-light-small.svg` | Small badge, light | 96 × 26 | source |
-| `badge/byom-badge-dark-small.svg` | Small badge, dark | 96 × 26 | source |
-| `favicon.svg` | Favicon / monogram | 32 × 32 | source |
-| `og-image.svg` | Open Graph image (source) | 1200 × 630 | source |
+| `badge/byom-badge-light.svg` | Standard badge, light | 168 × 44 | **generated** |
+| `badge/byom-badge-dark.svg` | Standard badge, dark | 168 × 44 | **generated** |
+| `badge/byom-badge-light-small.svg` | Small badge, light | 96 × 26 | **generated** |
+| `badge/byom-badge-dark-small.svg` | Small badge, dark | 96 × 26 | **generated** |
+| `badge/byom-mark.svg` | Bare mark, light (minimal variant) | 24 × 24 | **generated** |
+| `badge/byom-mark-dark.svg` | Bare mark, dark (minimal variant) | 24 × 24 | **generated** |
+| `badge/byom-mark-currentColor.svg` | Bare mark, `currentColor` (themeable inline) | 24 × 24 | **generated** |
+| `favicon.svg` | Favicon / monogram | 32 × 32 | **generated** |
+| `og-image.svg` | Open Graph image (source) | 1200 × 630 | **generated** |
 | `og-image.png` | Open Graph image (delivered) | 1200 × 630 | **generated** |
 | `favicon-32.png` | PNG favicon fallback | 32 × 32 | **generated** |
 | `apple-touch-icon.png` | iOS home-screen icon | 180 × 180 | **generated** |
 
-The **generated** PNGs are produced from their SVG sources by `website/scripts/raster-assets.mjs`,
-which runs automatically as the `prebuild` step of `npm run build` (or on demand via `npm run
-raster`). They are committed so the repo is self-contained, and regenerated on every build so they
-never drift from the sources.
+The brand **SVGs** are produced from the single canonical mark by `website/scripts/gen-brand.mjs`;
+the **PNGs** are then rasterized from `favicon.svg` and `og-image.svg` by
+`website/scripts/raster-assets.mjs`. Both run automatically, in that order, as the `prebuild` step of
+`npm run build` (or on demand via `npm run brand` / `npm run raster`). All outputs are committed so
+the repo is self-contained, and regenerated on every build so the variants never drift from the mark.
+
+The bare mark (`byom-mark.svg`) is the **minimal variant** — the glyph with no frame or wordmark, for
+showing the pattern lightly inside a UI where space is tight. It stays legible down to ~12px.
+
+## Theming the inline mark
+
+**The badge stays canonical — do not recolour it.** The badge is a recognition mark: its value is
+that it looks the same across every app, so a returning user recognises the pattern (the same reason
+"verified" marks and the OSI logo are fixed). Recolouring the badge to an app's palette turns a shared
+signal into decoration. The badge is also shipped to be embedded via `<img src>` for strict-CSP
+safety, and an `<img>`-loaded SVG is an isolated document that cannot read the host page's
+`currentColor` or CSS variables — so it does not inherit a theme even if you try.
+
+The **bare mark used inline in an app's own chrome** is a different case — there it is a lightweight
+"BYOM-powered" affordance, not the trust claim, and matching the host theme is reasonable. To theme
+it, the app must **inline** the SVG into its DOM (not load it via `<img>`). Two supported ways:
+
+- **`currentColor` (monochrome).** Use `byom-mark-currentColor.svg`; it inherits the surrounding text
+  colour. The app square is drawn at half opacity so the two-square read survives in one colour. One
+  file works in both light and dark UIs.
+- **Two CSS variables (full two-tone).** Inline `byom-mark.svg` and map its fills to your own tokens:
+
+  ```svg
+  <rect x="2"  y="8" width="12" height="12" fill="var(--byom-app, #1B2028)"/>
+  <rect x="10" y="4" width="12" height="12" fill="var(--byom-model, #4D6483)"/>
+  <rect x="10" y="8" width="4"  height="8"  fill="var(--byom-app, #1B2028)"/>
+  ```
+
+  The app overrides `--byom-app` (its ink) and `--byom-model` (its accent); the defaults are BYOM's
+  slate. This keeps the deepened-overlap depth of the canonical mark.
 
 Each badge SVG is self-contained (no external references, no scripts, no external fonts) so it is
 safe under a strict CSP and embeds anywhere.
@@ -156,7 +192,8 @@ The link target (site root `/`) is likewise stable.
 - `favicon.svg` is the monogram (the mark on a rounded square). It is referenced from the site's
   `<link rel="icon">`, with `favicon-32.png` as a PNG fallback and `apple-touch-icon.png` (180 × 180)
   for iOS — both rasterized from the SVG by the build (see "File inventory").
-- `og-image.svg` is the editable Open Graph **source** (1200 × 630). Because several social platforms
-  and chat unfurlers do not render SVG OG images, the build rasterizes it to `og-image.png`, and
-  `<meta property="og:image">` references the PNG. The raster step inlines the design-system font so
-  the wordmark renders correctly without a system-font fallback.
+- `og-image.svg` is the Open Graph **source** (1200 × 630), generated alongside the badges from the
+  canonical mark by `gen-brand.mjs` (edit the layout there, not the SVG). Because several social
+  platforms and chat unfurlers do not render SVG OG images, the build rasterizes it to `og-image.png`,
+  and `<meta property="og:image">` references the PNG. The raster step inlines the design-system font
+  so the wordmark renders correctly without a system-font fallback.

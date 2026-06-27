@@ -8,12 +8,12 @@ The badge is for **free and open-source** apps. To display it, the app must be f
 
 ### Icon direction
 
-The badge glyph should evoke **connect your own model** — a model/socket/plug-into-slot idea. Deliberately avoid:
+The badge glyph should evoke **bring your own model** — the model you bring combining with the app. Deliberately avoid:
 
 - **The robot** — reads as "agent," which is the wrong meaning.
 - **The key-as-chore** — too literal and joyless.
 
-A plug, socket, or connect glyph carries "bring and connect your own" without the agent baggage.
+A simple, geometric "your model meets the app" mark carries "bring your own" without the agent baggage.
 
 ## What the badge can and cannot claim
 

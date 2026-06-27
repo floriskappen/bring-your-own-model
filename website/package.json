@@ -5,8 +5,9 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
+    "brand": "node scripts/gen-brand.mjs",
     "raster": "node scripts/raster-assets.mjs",
-    "prebuild": "node scripts/raster-assets.mjs && node scripts/gen-headers.mjs",
+    "prebuild": "node scripts/gen-brand.mjs && node scripts/raster-assets.mjs && node scripts/gen-headers.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check"
