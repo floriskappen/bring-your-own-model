@@ -11,6 +11,18 @@
 
 schema_version: v1.0.0
 
-# Empty until apps are published. The BYOM repo ships before the apps; entries
-# are added here as apps go live. Adding an app is a data edit — see README.md.
-apps: []
+# The BYOM repo ships before the apps; entries are added here as apps go live.
+# Adding an app is a data edit — see README.md.
+
+apps:
+  - name: de bedrijfskompas
+    url: https://bedrijfskompas.flkp.nl
+    description: Free, accountless company map that scores companies on five axes and offers opt-in in-browser Ikigai matching using the visitor's own model.
+    pinned_constitution_version: v1.2.0
+    integration_doc_url: https://github.com/floriskappen/de-bedrijfskompas-frontend/blob/main/docs/BYOM-INTEGRATION.md
+    source_url: https://github.com/floriskappen/de-bedrijfskompas-frontend
+    badge_variant: light-small
+    model_powered_features:
+      - name: Ikigai matching
+        description: Asks Ikigai-inspired questions and uses the visitor's model to derive ISCO codes, rank ~100 company profiles, and surface the best-matching companies.
+        category: worker
