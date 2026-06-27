@@ -1,5 +1,32 @@
 # Changelog
 
+## v1.2.0
+
+Badge mark redesign and a themeable inline mark. No normative invariant or contract change — the
+badge's served paths, dimensions, link target, and `alt` text are unchanged, so existing embeds keep
+working and pick up the new look on the next site deploy. The rest is additive: a bare minimal mark
+and a `currentColor` variant for inline use.
+
+### Badge
+
+- **New glyph.** The plug→socket glyph is replaced by the BYOM mark: two overlapping squares — the app
+  (ink) and the model you bring (accent), deepening where they overlap (the design system's
+  ink-and-pigment "multiply" material, expressed as a logo). Square corners, two-tone slate. Updated
+  the icon direction in `04-badge-and-registry.md` and "The glyph" in `badge/README.md` to match
+  (both previously described a plug into a two-slot socket).
+- **Minimal + themeable marks.** Added `byom-mark.svg` / `byom-mark-dark.svg` — the bare mark with no
+  frame or wordmark, legible down to ~12px for tight UI spots — and `byom-mark-currentColor.svg`,
+  which inherits the host's text colour when inlined. New "Theming the inline mark" section in
+  `badge/README.md`: the badge stays canonical (it is a recognition mark), while the inline mark may
+  follow the host theme via `currentColor` or two CSS variables. Inventory table updated.
+
+### Website (movement-facing, not part of the release artifact)
+
+- All brand SVGs (favicon, badges, marks, OG image) now generate from one canonical mark via
+  `website/scripts/gen-brand.mjs`, wired into `prebuild` ahead of the rasterizer, so the variants
+  cannot drift apart again. Badges dropped the app-store-style underline bar for a hairline border and
+  square corners; the footer mark (previously a stray `●—◗` text glyph) now uses the real mark.
+
 ## v1.1.0
 
 Integration-doc placement convention. No normative invariant or contract change — a placement

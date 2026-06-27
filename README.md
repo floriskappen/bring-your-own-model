@@ -47,8 +47,8 @@ pinned version in that doc.
 To update deliberately to a later release:
 
 ```sh
-cd vendor/byom && git fetch --tags && git checkout v1.1.0 && cd ..
-git commit -am "bump byom constitution submodule to v1.1.0"
+cd vendor/byom && git fetch --tags && git checkout v1.2.0 && cd ..
+git commit -am "bump byom constitution submodule to v1.2.0"
 ```
 
 Re-walk `05`'s conformance checklist against the changed constitution and update your
