@@ -1,17 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="168" height="44" viewBox="0 0 168 44" role="img" aria-label="byom badge — bring your own model">
   <title>byom badge (dark)</title>
-  <rect x="0.5" y="0.5" width="167" height="43" rx="8" fill="#1B2028" stroke="#E8EBF0" stroke-opacity="0.16"/>
-  <rect x="2" y="40" width="164" height="2.5" rx="1.25" fill="#6E83A0"/>
-  <!-- plug → socket glyph (monochrome) -->
-  <g transform="translate(12,5.2) scale(1.4)" fill="#E8EBF0">
-    <rect x="1.5" y="7" width="7" height="10" rx="2.4"/>
-    <rect x="0" y="10.6" width="2" height="2.8" rx="1"/>
-    <rect x="8.4" y="8.6" width="3.8" height="1.7" rx="0.85"/>
-    <rect x="8.4" y="13.7" width="3.8" height="1.7" rx="0.85"/>
-    <rect x="14" y="4.2" width="8.5" height="15.6" rx="3"/>
-    <rect x="16.7" y="7.6" width="2" height="3.6" rx="1" fill="#1B2028"/>
-    <rect x="16.7" y="12.8" width="2" height="3.6" rx="1" fill="#1B2028"/>
-  </g>
-  <text x="54" y="22" font-family="Archivo, 'Helvetica Neue', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="17" font-weight="700" letter-spacing="-0.3" fill="#E8EBF0" text-rendering="geometricPrecision">byom</text>
-  <text x="54" y="34.5" font-family="Archivo, 'Helvetica Neue', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="9.5" fill="#9AA3B5" text-rendering="geometricPrecision">bring your own model</text>
+  <rect x="0.5" y="0.5" width="167" height="43" fill="#1B2028" stroke="#E8EBF0" stroke-opacity="0.18"/>
+  <g transform="translate(14,10) scale(1)"><rect x="2" y="8" width="12" height="12" fill="#E8EBF0"/><rect x="10" y="4" width="12" height="12" fill="#6E83A0"/><rect x="10" y="8" width="4" height="8" fill="#4D6483"/></g>
+  <text x="52" y="24" font-family="Archivo, 'Helvetica Neue', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="800" letter-spacing="-0.6" fill="#E8EBF0" text-rendering="geometricPrecision">byom</text>
+  <text x="53" y="36" font-family="Archivo, 'Helvetica Neue', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="500" fill="#9AA3B5" text-rendering="geometricPrecision">bring your own model</text>
 </svg>
