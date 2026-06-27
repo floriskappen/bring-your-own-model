@@ -25,6 +25,35 @@ The split is deliberate, and it is the load-bearing structural fact of the proje
 - **`website/`** — **movement-facing**. The philosophy, the registry of participating apps, and the
   public security page, for the wider world. Not what an implementing agent reads.
 
+## Consuming as a submodule
+
+This repo is consumed as a git submodule pinned to a release tag, the same way a shared design system
+is. The release artifact is `constitution/`; `website/` is movement-facing and not part of what an
+implementing agent reads.
+
+To add it to an app:
+
+```sh
+git submodule add https://github.com/floriskappen/bring-your-own-model.git vendor/byom
+cd vendor/byom && git checkout v1.0.0 && cd ..
+git commit -am "add byom constitution submodule (pinned at v1.0.0)"
+```
+
+Then read [`vendor/byom/AGENTS.md`](./vendor/byom/AGENTS.md) and author a `BYOM-INTEGRATION.md` at your
+repo root from the template at `vendor/byom/constitution/BYOM-INTEGRATION.template.md`. Record the
+pinned version in that doc.
+
+To update deliberately to a later release:
+
+```sh
+cd vendor/byom && git fetch --tags && git checkout v1.1.0 && cd ..
+git commit -am "bump byom constitution submodule to v1.1.0"
+```
+
+Re-walk `05`'s conformance checklist against the changed constitution and update your
+`BYOM-INTEGRATION.md` (and its propagation log) at each bump. This is a deliberate, reviewed update —
+not an automatic float to latest.
+
 ## If you are a coding agent
 
 Start at **[`AGENTS.md`](./AGENTS.md)**. It tells you what this repo is, what to read
@@ -47,12 +76,12 @@ A thin index also lives at [`CONSTITUTION.md`](./CONSTITUTION.md).
 
 ## Status
 
-Early. OSS-first, no monetization assumed — built at N=1 to make a multi-app life easier and encode
-the security rules once. External adopters are a bonus, never a design assumption.
+OSS-first, no monetization — built at N=1 to make a multi-app life easier and encode the security
+rules once. External adopters are a bonus, never a design assumption.
 
-- **Released:** `v0.1.0` — first pre-v1 cut, cut so a consuming app can submodule it and validate the integration guide (Phase 5). `v1.0.0` remains the target.
+- **Released:** `v1.0.0` — the BYOM constitution, validated end-to-end against a real consuming app
+  (Bedrijfskompas). Consumed as a pinned git submodule. See [`CHANGELOG.md`](./CHANGELOG.md).
 - **First apps:** Bedrijfskompas (company map + agentic CV matching) and e-lezer (e-reader).
-- **What's left to ship v1:** see [`ROADMAP.md`](./ROADMAP.md).
 
 ## License
 

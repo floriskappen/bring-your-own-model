@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Validate website/registry/registry.yaml against registry.schema.json.
+"""Validate constitution/registry/registry.yaml against registry.schema.json.
 
 Uses PyYAML and jsonschema (real libraries, not a hand-rolled parser). Run
 from the repo root:
 
-    python3 website/registry/validate_registry.py
+    python3 constitution/registry/validate_registry.py
 
 Exits 0 if valid, non-zero with a per-field error report otherwise.
 """

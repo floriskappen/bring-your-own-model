@@ -22,9 +22,13 @@ This is the contract for the connect/onboarding flow — the experience of a use
 
 6. **Tell the truth about safety.** Link to or restate the honest threat model: browser-local is a privacy/control win, not a cryptographic guarantee. Do not imply more safety than exists.
 
+**Acceptance:** before the key input, the onboarding surfaces what connecting does and costs, where to get a key, the provider spend limit, and the honest threat model — in the active locale. Subjective legibility is the spirit; these elements, in that order, are the testable floor.
+
 ## After connecting
 
 The wizard is the first-run instance of a persistent connection surface, not a one-time door. After connecting, the user can always reach a way to: change the model (within the feature's category), adjust the budget, clear or rotate the key, and view local spend history. A model connection is not set-and-forget; the user stays in control of it for as long as it is set.
+
+Here "persistent" means always-reachable within a session, not a durable linkable URL. In a multi-page app, a real settings route is a full navigation that tears down the JS context and would drop an unsaved (in-memory) session key (invariant 1). A same-page, in-app surface satisfies "persistent" without that cost, and is the compliant form. Bridging a real navigation via `sessionStorage` is a deviation to record with justification — `sessionStorage` is more durable than a RAM variable (it survives a tab's reloads within a session), which is exactly what invariant 1 protects against by default.
 
 ## When a request fails
 

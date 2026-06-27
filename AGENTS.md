@@ -6,7 +6,7 @@
 
 This is **not** a package, framework, plugin, or component. There is nothing to install. BYOM (Bring Your Own Model) is an **idea you embed into a project** — a constitution of concepts, invariants, and contracts. The technical implementation is left to each application, because applications differ in framework and stack.
 
-This repository is typically consumed as a **git submodule**, pinned to a released version tag (e.g. `v0.1.0`), the same way a shared design system is consumed. Consuming repos pin a version and update deliberately.
+This repository is typically consumed as a **git submodule**, pinned to a released version tag (e.g. `v1.0.0`), the same way a shared design system is consumed. Consuming repos pin a version and update deliberately.
 
 ## What to read
 
@@ -20,13 +20,15 @@ Read everything under [`constitution/`](./constitution/), in order:
 6. [`05-integration-guide.md`](./constitution/05-integration-guide.md) — how to author this app's own `BYOM-INTEGRATION.md`
 7. [`06-cost-transparency.md`](./constitution/06-cost-transparency.md) — spend visibility: real cost, local history, no lost work
 
+The concrete badge artifact and embed contract live at [`constitution/badge/README.md`](./constitution/badge/README.md), and the registry schema and submission process at [`constitution/registry/README.md`](./constitution/registry/README.md). Both are referenced by `04` and `05`.
+
 ## What to ignore
 
-**Ignore [`website/`](./website/) entirely.** It is the public, movement-facing site (philosophy, registry, security page) for human readers discovering BYOM. It is not relevant to implementing BYOM in an application. Do not read it, do not base implementation decisions on it.
+**Ignore [`website/`](./website/) entirely.** It is the public, movement-facing site (philosophy and security pages) for human readers discovering BYOM. It is not relevant to implementing BYOM in an application. Do not read it, do not base implementation decisions on it.
 
 ## What to produce in the consuming repository
 
-When you implement BYOM in an application, create a **`BYOM-INTEGRATION.md`** at that repository's root. It describes how BYOM is implemented *for that specific app* — which features are model-powered, which model category each needs, how the connect wizard is wired in, how budget limits surface in that UI. See [`05-integration-guide.md`](./constitution/05-integration-guide.md) for how to author it.
+When you implement BYOM in an application, create a **`BYOM-INTEGRATION.md`** at that repository's root. It describes how BYOM is implemented *for that specific app* — which features are model-powered, which model category each needs, how the connect wizard is wired in, how budget limits surface in that UI. See [`05-integration-guide.md`](./constitution/05-integration-guide.md) for how to author it; a skeleton template and worked example ship at [`constitution/BYOM-INTEGRATION.template.md`](./constitution/BYOM-INTEGRATION.template.md).
 
 The constitution stays idea-level and stack-agnostic. The technical implementation — frameworks, libraries, exact code — belongs in the consuming application and its `BYOM-INTEGRATION.md`, never in this repository.
 
