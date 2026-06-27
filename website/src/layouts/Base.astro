@@ -13,7 +13,9 @@ interface Props {
 const { title, description = 'Free software for the LLM era. The app is free; you bring the model for the parts that need it.', path = '' } = Astro.props;
 
 const siteName = 'bring your own model';
-const fullTitle = path ? `${title} — ${siteName}` : `${siteName}`;
+// Only prefix a page title when there actually is one; the home page passes an
+// empty title, so it shows the site name alone (no dangling "— ").
+const fullTitle = title ? `${title} — ${siteName}` : siteName;
 // Rasterized PNG (built by scripts/raster-assets.mjs) — several social
 // platforms and chat unfurlers do not render SVG Open Graph images.
 const ogImage = `${SITE}/assets/og-image.png`;
