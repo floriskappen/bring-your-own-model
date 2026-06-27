@@ -18,7 +18,7 @@ An application is BYOM-compliant when it:
 2. honors the six security invariants (`02-security-invariants.md`),
 3. follows the wizard UX contract (`03-wizard-ux-contract.md`),
 4. surfaces spend per the cost-transparency principles (`06-cost-transparency.md`),
-5. ships a `BYOM-INTEGRATION.md` at its repo root (spec below), and
+5. ships a `BYOM-INTEGRATION.md` (conventionally at `docs/BYOM-INTEGRATION.md`; the repo root is also acceptable — spec below), and
 6. pins a released constitution version as a submodule.
 
 Showing the badge (`04-badge-and-registry.md`) and listing in the registry follow from the above — they are not separate requirements.
@@ -75,7 +75,7 @@ The minimum an app must surface is defined in `06-cost-transparency.md`: real pe
 
 ## Authoring `BYOM-INTEGRATION.md`
 
-Create this file at the root of the consuming repository. A skeleton template and a worked example ship at `constitution/BYOM-INTEGRATION.template.md` and `constitution/BYOM-INTEGRATION.example.md` — copy the template and fill it in. It records, for that specific app:
+Create this file in the consuming repository — conventionally at `docs/BYOM-INTEGRATION.md` (the repo root is also an acceptable home). A skeleton template and a worked example ship at `constitution/BYOM-INTEGRATION.template.md` and `constitution/BYOM-INTEGRATION.example.md` — copy the template and fill it in. It records, for that specific app:
 
 1. **App name and one-line description.** What the app is, in a sentence.
 2. **The free core.** Which features work with no model connected (if any). An app can be entirely model-dependent; what is required is that features which don't need inference are not gated behind a key.
@@ -111,7 +111,7 @@ To list an app in the registry, open a PR editing `constitution/registry/registr
 - [ ] Non-model features (if any) are not gated behind a key.
 - [ ] Call path is browser → provider direct; no developer backend in the path.
 - [ ] Budget ceiling (invariant 6) and cost-transparency surface (`06`) both present.
-- [ ] `BYOM-INTEGRATION.md` authored at the repo root, with all fields above.
+- [ ] `BYOM-INTEGRATION.md` authored (conventionally at `docs/`; repo root acceptable), with all fields above.
 - [ ] Constitution version pinned to a release tag.
 
 ## Submodule and versioning

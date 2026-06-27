@@ -39,8 +39,9 @@ cd vendor/byom && git checkout v1.0.0 && cd ..
 git commit -am "add byom constitution submodule (pinned at v1.0.0)"
 ```
 
-Then read [`vendor/byom/AGENTS.md`](./vendor/byom/AGENTS.md) and author a `BYOM-INTEGRATION.md` at your
-repo root from the template at `vendor/byom/constitution/BYOM-INTEGRATION.template.md`. Record the
+Then read [`vendor/byom/AGENTS.md`](./vendor/byom/AGENTS.md) and author a `BYOM-INTEGRATION.md`
+(conventionally at `docs/BYOM-INTEGRATION.md`; the repo root is also acceptable) from the template at
+`vendor/byom/constitution/BYOM-INTEGRATION.template.md`. Record the
 pinned version in that doc.
 
 To update deliberately to a later release:
